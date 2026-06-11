@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&height=180&text=BIENVENIDO%20A%20MI%20ESPACIO&fontAlign=50&fontAlignY=34&color=0:090014,25:120458,50:00F0FF,75:FF00C8,100:090014&fontColor=F8F8FF&desc=Developer%20Profile&descAlignY=58&animation=fadeIn" />
+<img src="https://capsule-render.vercel.app/api?type=waving&height=180&text=MI%20ESPACIO&fontAlign=50&fontAlignY=34&fontSize=42&color=0:090014,25:120458,50:00F0FF,75:FF00C8,100:090014&fontColor=F8F8FF&desc=Developer%20Profile&descAlignY=58&animation=fadeIn" />
 
 </div>
 
@@ -21,23 +21,23 @@ Nombre   :: Mauricio Andres Fuentes Bustamante
 Alias    :: maufuenb
 Base     :: Vina del Mar, Chile
 Rol      :: Ingeniero Informatico + Administrador de Empresas
-Estado   :: Diseñando soluciones con mentalidad tecnica y de negocio
-Modo     :: Full stack pragmatico, iterativo y apoyado en IA
+Estado   :: Diseñando soluciones con mentalidad técnica y de negocio
+Modo     :: Full stack pragmático, iterativo y apoyado en IA
 ```
 
 ## `> perfil`
 
-Soy Mauricio, un profesional que combina tecnologia, analisis y vision de negocios para construir proyectos con impacto real.
+Soy Mauricio, un profesional que combina tecnología, análisis y visión de negocios para construir proyectos con impacto real.
 
-Me interesa crear soluciones modernas, utiles y bien pensadas, donde el codigo no solo funcione, sino que tambien responda a una necesidad concreta.
+Me interesa crear soluciones modernas, útiles y bien pensadas, donde el código no solo funcione, sino que también responda a una necesidad concreta.
 
-Mi enfoque es pragmatico: conozco un poco de muchas tecnologias y aprovecho componentes, librerias, codigo reutilizable e inteligencia artificial para avanzar mas rapido y mejor. No se trata de reinventar la rueda, sino de integrarla con criterio.
+Mi enfoque es pragmático: conozco un poco de muchas tecnologías y aprovecho componentes, librerías, código reutilizable e inteligencia artificial para avanzar más rápido y mejor. No se trata de reinventar la rueda, sino de integrarla con criterio.
 
 ## `> stack.loading`
 
 <div align="center">
   <img src="https://img.shields.io/badge/HTML5-0A0A0A?style=for-the-badge&logo=html5&logoColor=FF6B6B" />
-  <img src="https://img.shields.io/badge/CSS3-0A0A0A?style=for-the-badge&logo=css3&logoColor=00F7FF" />
+  <img src="https://img.shields.io/badge/CSS3-0A0A0A?style=for-the-badge&logo=css&logoColor=00F7FF" />
   <img src="https://img.shields.io/badge/JavaScript-0A0A0A?style=for-the-badge&logo=javascript&logoColor=FFE66D" />
   <img src="https://img.shields.io/badge/TypeScript-0A0A0A?style=for-the-badge&logo=typescript&logoColor=4D96FF" />
   <img src="https://img.shields.io/badge/React-0A0A0A?style=for-the-badge&logo=react&logoColor=00F7FF" />
@@ -63,7 +63,7 @@ No reinventar la rueda.
 Construir con criterio.
 Reutilizar componentes.
 Integrar IA cuando aporta valor.
-Moverse rapido sin perder enfoque.
+Moverse rápido sin perder enfoque.
 ```
 
 ## `> github.stats`
@@ -75,17 +75,25 @@ Moverse rapido sin perder enfoque.
 
 ## `> featured.projects`
 
+<br>
+
 <div align="center">
   <a href="https://maufuenb.github.io/Alke-Wallet-Digital/">
     <img src="https://img.shields.io/badge/ALKE_WALLET-Digital_Project-0A0A0A?style=for-the-badge&logo=githubpages&logoColor=00F7FF" />
   </a>
+  <br><br>
   <img src="https://img.shields.io/badge/KIVERON-In_Development-0A0A0A?style=for-the-badge&logo=dependabot&logoColor=FF00C8" />
+  <br><br>
   <img src="https://img.shields.io/badge/BERU-Private_Project-0A0A0A?style=for-the-badge&logo=ghost&logoColor=39FF14" />
 </div>
 
-- `Alke Wallet Digital`: interfaz financiera moderna enfocada en experiencia visual, estructura clara y navegacion fluida.
-- `Kiveron`: ecosistema digital orientado a comunidades geek, disenado para centralizar coleccionismo, interaccion e intercambio dentro de una sola plataforma.
-- `Beru`: sistema de asistencia inteligente para navegacion, orientado a mejorar seguridad, autonomia operativa y apoyo en tiempo real a bordo.
+<br>
+
+- `Alke Wallet Digital`: interfaz financiera moderna enfocada en experiencia visual, estructura clara y navegación fluida.
+
+- `Kiveron`: ecosistema digital orientado a comunidades geek, diseñado para centralizar coleccionismo, interacción e intercambio dentro de una sola plataforma.
+
+- `Beru`: sistema de asistencia inteligente para navegación, orientado a mejorar seguridad, autonomía operativa y apoyo en tiempo real a bordo.
 
 ## `> building.brands`
 
@@ -94,15 +102,15 @@ Moverse rapido sin perder enfoque.
 </div>
 
 <div align="center">
-  <sub><strong>Kiveron</strong> y <strong>Kiveron Ads</strong> comparten el mismo nucleo visual como parte de un mismo ecosistema de productos.</sub>
+  <sub><strong>Kiveron</strong> y <strong>Kiveron Ads</strong> comparten el mismo núcleo visual como parte de un mismo ecosistema de productos.</sub>
 </div>
 
 ## `> current.mission`
 
 - Construir una presencia profesional en GitHub con identidad propia.
-- Mostrar proyectos que mezclen tecnologia, criterio y enfoque de negocio.
+- Mostrar proyectos que mezclen tecnología, criterio y enfoque de negocio.
 - Seguir aprendiendo, iterando y creando soluciones con estilo moderno.
-- Aprovechar herramientas existentes para resolver mejor, no para complicar mas.
+- Aprovechar herramientas existentes para resolver mejor, no para complicar más.
 
 ## `> connect.exe`
 
