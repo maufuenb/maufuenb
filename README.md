@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&height=180&text=WELCOME%20TO%20MY%20GRID&fontAlign=50&fontAlignY=34&color=0:090014,25:120458,50:00F0FF,75:FF00C8,100:090014&fontColor=F8F8FF&desc=Cyberpunk%20Developer%20Profile&descAlignY=58&animation=fadeIn" />
+<img src="https://capsule-render.vercel.app/api?type=waving&height=180&text=BIENVENIDO%20A%20MI%20ESPACIO&fontAlign=50&fontAlignY=34&color=0:090014,25:120458,50:00F0FF,75:FF00C8,100:090014&fontColor=F8F8FF&desc=Developer%20Profile&descAlignY=58&animation=fadeIn" />
 
 </div>
 
@@ -71,6 +71,30 @@ Moverse rapido sin perder enfoque.
 <div align="center">
   <img height="170" src="https://github-readme-stats.vercel.app/api?username=maufuenb&show_icons=true&theme=radical&hide_border=true&title_color=00F7FF&icon_color=FF00C8&text_color=F8F8FF&bg_color=0D1117" />
   <img height="170" src="https://github-readme-stats.vercel.app/api/top-langs/?username=maufuenb&layout=compact&theme=radical&hide_border=true&title_color=00F7FF&text_color=F8F8FF&bg_color=0D1117" />
+</div>
+
+## `> featured.projects`
+
+<div align="center">
+  <a href="https://maufuenb.github.io/Alke-Wallet-Digital/">
+    <img src="https://img.shields.io/badge/ALKE_WALLET-Digital_Project-0A0A0A?style=for-the-badge&logo=githubpages&logoColor=00F7FF" />
+  </a>
+  <img src="https://img.shields.io/badge/KIVERON-In_Development-0A0A0A?style=for-the-badge&logo=dependabot&logoColor=FF00C8" />
+  <img src="https://img.shields.io/badge/BERU-Private_Project-0A0A0A?style=for-the-badge&logo=ghost&logoColor=39FF14" />
+</div>
+
+- `Alke Wallet Digital`: interfaz financiera moderna enfocada en experiencia visual, estructura clara y navegacion fluida.
+- `Kiveron`: ecosistema digital orientado a comunidades geek, disenado para centralizar coleccionismo, interaccion e intercambio dentro de una sola plataforma.
+- `Beru`: sistema de asistencia inteligente para navegacion, orientado a mejorar seguridad, autonomia operativa y apoyo en tiempo real a bordo.
+
+## `> building.brands`
+
+<div align="center">
+  <img src="./assets/kiveron-logo.png" alt="Kiveron Logo" width="170" />
+</div>
+
+<div align="center">
+  <sub><strong>Kiveron</strong> y <strong>Kiveron Ads</strong> comparten el mismo nucleo visual como parte de un mismo ecosistema de productos.</sub>
 </div>
 
 ## `> current.mission`
