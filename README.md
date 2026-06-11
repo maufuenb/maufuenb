@@ -1,11 +1,15 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&height=220&text=Mauricio%20Andres%20Fuentes%20Bustamante&fontAlign=50&fontAlignY=38&color=0:090014,25:120458,50:00F0FF,75:FF00C8,100:090014&fontColor=F8F8FF&desc=Cyberpunk%20Developer%20Profile&descAlignY=60&animation=fadeIn" />
+<img src="https://capsule-render.vercel.app/api?type=waving&height=180&text=WELCOME%20TO%20MY%20GRID&fontAlign=50&fontAlignY=34&color=0:090014,25:120458,50:00F0FF,75:FF00C8,100:090014&fontColor=F8F8FF&desc=Cyberpunk%20Developer%20Profile&descAlignY=58&animation=fadeIn" />
 
 </div>
 
 <div align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Orbitron&weight=700&size=26&pause=1000&color=00F7FF&center=true&vCenter=true&width=900&lines=Ingeniero+Informatico;Administrador+de+Empresas;Desde+Vina+del+Mar%2C+Chile;Construyendo+ideas+con+codigo%2C+vision+y+estrategia" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.demolab.com?font=Orbitron&weight=700&size=30&pause=2200&color=FF00C8&center=true&vCenter=true&repeat=false&width=900&lines=Mauricio+Andres+Fuentes+Bustamante" alt="Nombre cyberpunk" />
+</div>
+
+<div align="center">
+  <img src="https://readme-typing-svg.demolab.com?font=Rajdhani&weight=700&size=24&pause=1000&color=00F7FF&center=true&vCenter=true&width=900&lines=Ingeniero+Informatico;Administrador+de+Empresas;Desde+Vina+del+Mar%2C+Chile;Construyendo+ideas+con+codigo%2C+vision+y+estrategia" alt="Typing SVG" />
 </div>
 
 ---
