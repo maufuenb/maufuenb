@@ -66,6 +66,18 @@ Integrar IA cuando aporta valor.
 Moverse rápido sin perder enfoque.
 ```
 
+## `> beyond.code`
+
+Fuera del desarrollo, me mueven el anime, las películas, las series, los videojuegos y todo lo que combine creatividad con tecnología.
+
+Me gusta desarmar, armar, reparar y optimizar hardware; ahí comenzó gran parte de mi interés por los computadores, la experimentación y la búsqueda de mejor rendimiento.
+
+También disfruto el coleccionismo, las figuras, el maquetado y la impresión 3D, una mezcla que conversa muy bien con mi interés por construir experiencias y productos con identidad propia.
+
+Mi estética está muy influenciada por la ciencia ficción, Blade Runner, Cyberpunk, el anime y autores como William Gibson, lo que empuja mi forma de crear hacia algo más futurista, moderno y disruptivo.
+
+Y cuando necesito salir de la pantalla, conecto mucho con el trekking, el cerro, los bosques y las tardes tranquilas junto a un lago.
+
 ## `> github.stats`
 
 <div align="center">
