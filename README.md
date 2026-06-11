@@ -119,8 +119,6 @@ Y cuando necesito salir de la pantalla, conecto mucho con el trekking, el cerro,
 
 ## `> current.mission`
 
-- Construir una presencia profesional en GitHub con identidad propia.
-- Mostrar proyectos que mezclen tecnología, criterio y enfoque de negocio.
 - Seguir aprendiendo, iterando y creando soluciones con estilo moderno.
 - Aprovechar herramientas existentes para resolver mejor, no para complicar más.
 
