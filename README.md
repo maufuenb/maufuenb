@@ -5,11 +5,11 @@
 </div>
 
 <div align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Orbitron&weight=700&size=30&pause=2200&color=FF00C8&center=true&vCenter=true&repeat=false&width=900&lines=Mauricio+Andres+Fuentes+Bustamante" alt="Nombre cyberpunk" />
+  <img src="https://readme-typing-svg.demolab.com?font=Orbitron&weight=700&size=30&pause=2200&color=FF00C8&center=true&vCenter=true&repeat=false&width=900&lines=Mauricio+Andr%C3%A9s+Fuentes+Bustamante" alt="Nombre cyberpunk" />
 </div>
 
 <div align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Rajdhani&weight=700&size=24&pause=1000&color=00F7FF&center=true&vCenter=true&width=900&lines=Ingeniero+Informatico;Administrador+de+Empresas;Desde+Vina+del+Mar%2C+Chile;Construyendo+ideas+con+codigo%2C+vision+y+estrategia" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.demolab.com?font=Rajdhani&weight=700&size=24&pause=1000&color=00F7FF&center=true&vCenter=true&width=900&lines=Ingeniero+Inform%C3%A1tico;Administrador+de+Empresas;Desde+Vi%C3%B1a+del+Mar%2C+Chile;Construyendo+ideas+con+c%C3%B3digo%2C+visi%C3%B3n+y+estrategia" alt="Typing SVG" />
 </div>
 
 ---
@@ -17,10 +17,10 @@
 ## `> whoami`
 
 ```txt
-Nombre   :: Mauricio Andres Fuentes Bustamante
+Nombre   :: Mauricio Andrés Fuentes Bustamante
 Alias    :: maufuenb
-Base     :: Vina del Mar, Chile
-Rol      :: Ingeniero Informatico + Administrador de Empresas
+Base     :: Viña del Mar, Chile
+Rol      :: Ingeniero Informático + Administrador de Empresas
 Estado   :: Diseñando soluciones con mentalidad técnica y de negocio
 Modo     :: Full stack pragmático, iterativo y apoyado en IA
 ```
