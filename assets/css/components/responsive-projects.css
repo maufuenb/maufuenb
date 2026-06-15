@@ -1,0 +1,37 @@
+@media (min-width: 768px) and (max-width: 1023px) {
+  [data-project-carousel-root] {
+    width: min(100%, 42rem);
+    margin-inline: auto;
+  }
+
+  [data-project-carousel-root] [data-project-carousel] {
+    overflow: visible;
+  }
+
+  [data-project-carousel-root] [data-project-track] {
+    position: relative;
+    width: 100%;
+    min-height: 26rem;
+  }
+
+  [data-project-carousel-root] [data-project-slide] {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding-inline: 1.25rem;
+  }
+
+  .project-card {
+    width: min(100%, 34rem);
+    min-width: 0;
+    min-height: 24rem;
+    margin-inline: auto;
+    border-radius: 1.6rem;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.06),
+      0 22px 42px rgba(0, 0, 0, 0.28);
+  }
+}

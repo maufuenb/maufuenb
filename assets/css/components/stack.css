@@ -1,0 +1,50 @@
+.stack-meter-ring {
+  width: var(--size, 7rem);
+  height: var(--size, 7rem);
+  display: grid;
+  place-items: center;
+  border-radius: 9999px;
+  background:
+    radial-gradient(closest-side, rgba(8, 10, 18, 0.95) 72%, transparent 73% 100%),
+    conic-gradient(var(--meter-color, #abe47d) calc(var(--progress) * 1%), rgba(171, 228, 125, 0.08) 0);
+  box-shadow:
+    0 0 18px color-mix(in srgb, var(--meter-color, #abe47d) 24%, transparent),
+    inset 0 0 26px rgba(255, 255, 255, 0.02);
+  transition: transform 220ms ease, box-shadow 220ms ease, filter 220ms ease;
+}
+
+.stack-meter-ring span {
+  color: var(--meter-color, #abe47d);
+  text-shadow: 0 14px 8px color-mix(in srgb, var(--meter-color, #abe47d) 28%, transparent);
+  transition: transform 220ms ease, text-shadow 220ms ease;
+}
+
+.stack-module:hover .stack-meter-ring {
+  transform: scale(1.08);
+  filter: saturate(1.15);
+  box-shadow:
+    0 0 24px color-mix(in srgb, var(--meter-color, #abe47d) 38%, transparent),
+    0 0 42px color-mix(in srgb, var(--meter-color, #abe47d) 18%, transparent),
+    inset 0 0 30px rgba(255, 255, 255, 0.03);
+}
+
+.stack-module:hover .stack-meter-ring span {
+  transform: translateY(-1px);
+  text-shadow: 0 0 16px color-mix(in srgb, var(--meter-color, #abe47d) 38%, transparent);
+}
+
+.stack-meter-front {
+  --meter-color: #48f3ff;
+}
+
+.stack-meter-back {
+  --meter-color: #ff48c7;
+}
+
+.stack-meter-services {
+  --meter-color: #abe47d;
+}
+
+.stack-meter-frameworks {
+  --meter-color: #ffd166;
+}

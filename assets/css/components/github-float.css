@@ -1,0 +1,100 @@
+.floating-github {
+  position: fixed;
+  left: 0;
+  right: auto;
+  top: 50%;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 4.5rem;
+  padding: 0.75rem 0.95rem 0.75rem 0.8rem;
+  color: #d9faff;
+  border: 1px solid rgba(72, 243, 255, 0.25);
+  border-left: 0;
+  border-radius: 0 1.35rem 1.35rem 0;
+  background: rgba(7, 10, 22, 0.84);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(18px);
+  overflow: hidden;
+  transform: translate3d(0, -50%, 0);
+  transition:
+    width 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.22s ease,
+    border-color 0.22s ease,
+    color 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.floating-github:hover {
+  width: 15.75rem;
+  transform: translate3d(0, -50%, 0);
+  border-color: rgba(72, 243, 255, 0.55);
+  color: var(--cyan);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.36);
+}
+
+.floating-github__badge {
+  display: flex;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(72, 243, 255, 0.3);
+  border-radius: 9999px;
+  background: linear-gradient(135deg, rgba(72, 243, 255, 0.14), rgba(255, 72, 199, 0.16));
+}
+
+.floating-github__content {
+  min-width: 0;
+  width: 0;
+  flex: 0 0 0;
+  overflow: hidden;
+  opacity: 0;
+  max-width: 0;
+  white-space: nowrap;
+  transform: translateX(0.35rem);
+  transition:
+    opacity 0.2s ease,
+    max-width 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.22s ease;
+}
+
+.floating-github:hover .floating-github__content,
+.floating-github:focus-visible .floating-github__content {
+  width: auto;
+  flex: 1 1 auto;
+  opacity: 1;
+  max-width: 10rem;
+  transform: translateX(0);
+}
+
+.floating-github.is-docked {
+  position: static;
+  left: auto;
+  right: auto;
+  top: auto;
+  bottom: auto;
+  width: auto;
+  min-width: 18rem;
+  max-width: 100%;
+  overflow: visible;
+  border-left: 1px solid rgba(72, 243, 255, 0.25);
+  border-radius: 9999px;
+  justify-content: flex-start;
+  transform: none;
+}
+
+.floating-github.is-docked:hover {
+  width: auto;
+  transform: none;
+}
+
+.floating-github.is-docked .floating-github__content {
+  width: auto;
+  flex: 1 1 auto;
+  opacity: 1;
+  max-width: none;
+  transform: none;
+}

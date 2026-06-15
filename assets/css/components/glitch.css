@@ -1,0 +1,60 @@
+.glitch-text {
+  position: relative;
+  display: inline-block;
+  isolation: isolate;
+  color: #fff;
+  filter: drop-shadow(0 0 12px rgba(72, 243, 255, 0.12));
+}
+
+.glitch-text span {
+  display: block;
+  animation: glitch-paths 9s step-end infinite;
+}
+
+.layers::before,
+.layers::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  pointer-events: none;
+}
+
+.layers::before {
+  color: rgba(255, 72, 199, 0.88);
+  transform: translate(0.045em, 0.03em);
+}
+
+.layers::after {
+  color: rgba(72, 243, 255, 0.9);
+  transform: translate(-0.05em, -0.02em);
+}
+
+.glitch-text::before {
+  animation:
+    glitch-paths 9s step-end infinite,
+    glitch-opacity 7s step-end infinite,
+    glitch-font 11s step-end infinite,
+    glitch-movement-a 12s step-end infinite;
+}
+
+.glitch-text::after {
+  animation:
+    glitch-paths 9s step-end infinite,
+    glitch-opacity 8s step-end infinite,
+    glitch-font 10s step-end infinite reverse,
+    glitch-movement-b 9s step-end infinite;
+}
+
+.glitch-accent {
+  color: transparent;
+  background: linear-gradient(90deg, var(--cyan), #a775ff 50%, var(--magenta));
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.glitch-accent::before,
+.glitch-accent::after {
+  z-index: -2;
+}

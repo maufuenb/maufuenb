@@ -1,0 +1,22 @@
+@media (prefers-reduced-motion: reduce) {
+  .glitch-text span,
+  .glitch-text::before,
+  .glitch-text::after,
+  .button::after,
+  .music-disc {
+    animation: none;
+    clip-path: none;
+    filter: none;
+  }
+
+  .button,
+  .stack-meter-ring,
+  .stack-meter-ring span,
+  .project-card {
+    transition: none;
+  }
+
+  .project-link {
+    animation: none;
+  }
+}

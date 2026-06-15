@@ -1,0 +1,12 @@
+@media (max-width: 1023px) {
+  .glitch-text {
+    max-width: 100%;
+  }
+
+  .glitch-text span,
+  .layers::before,
+  .layers::after {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+}

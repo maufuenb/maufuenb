@@ -1,0 +1,132 @@
+.footer-shell {
+  position: relative;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    radial-gradient(circle at 0% 0%, rgba(72, 243, 255, 0.08), transparent 26%),
+    radial-gradient(circle at 100% 0%, rgba(255, 72, 199, 0.08), transparent 28%),
+    linear-gradient(180deg, rgba(7, 10, 22, 0.34), rgba(7, 10, 22, 0.56));
+}
+
+.footer-panel {
+  position: relative;
+  overflow: hidden;
+  padding: 0.9rem 0 0.9rem;
+}
+
+.footer-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(72, 243, 255, 0.68), rgba(255, 72, 199, 0.38), transparent);
+}
+
+.footer-dock {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  width: 100%;
+  max-width: 23rem;
+  margin-left: auto;
+}
+
+.footer-dock--player {
+  max-width: 23rem;
+}
+
+.footer-dock__slot {
+  display: flex;
+  align-items: flex-start;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.footer-dock__slot--github {
+  min-height: 0;
+}
+
+.footer-dock__slot--player {
+  justify-content: flex-start;
+  min-height: 0;
+}
+
+.footer-dock__slot--player .floating-player.is-docked {
+  width: 100%;
+  position: static;
+  z-index: auto;
+  left: auto;
+  right: auto;
+  top: auto;
+  bottom: auto;
+  max-width: 100%;
+  transform: none;
+}
+
+.footer-dock__slot--player .floating-player.is-docked .floating-player__panel {
+  overflow: hidden;
+  border-color: rgba(72, 243, 255, 0.16);
+  border-radius: 1.35rem;
+  background: linear-gradient(180deg, rgba(8, 11, 24, 0.94), rgba(8, 6, 18, 0.92));
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.26);
+  backdrop-filter: blur(18px);
+}
+
+.footer-dock__slot--player .floating-player.is-docked .floating-player__summary {
+  padding: 0.85rem 0.95rem 0 0.95rem;
+  transform: scale(0.92);
+}
+
+.footer-dock__slot--player .floating-player.is-docked .floating-player__controls {
+  padding: 0 0.95rem 0.9rem 0.95rem;
+}
+
+.footer-dock__slot--player .floating-player.is-docked .floating-player__details p:first-child {
+  font-size: 0.62rem;
+}
+
+.footer-dock__slot--player .floating-player.is-docked .floating-player__details p:nth-child(2) {
+  font-size: 0.86rem;
+}
+
+.footer-dock__slot--player .floating-player.is-docked .floating-player__details p:nth-child(3) {
+  font-size: 0.8rem;
+}
+
+.footer-dock__slot--player .floating-player.is-docked .floating-player__icon-button {
+  width: 2.35rem;
+  height: 2.05rem;
+  font-size: 0.82rem;
+}
+
+.footer-dock__slot--player .floating-player.is-docked .floating-player__volume {
+  min-width: 5.8rem;
+  padding: 0.22rem 0.4rem 0.22rem 0.5rem;
+}
+
+.footer-dock__slot--player .floating-player.is-docked .floating-player__volume-input {
+  width: 3.25rem;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1.7fr)
+    minmax(0, 0.75fr)
+    minmax(0, 0.75fr)
+    minmax(0, 0.95fr)
+    minmax(20rem, 1.05fr);
+  gap: 2rem;
+  padding: 0.15rem 0 1rem;
+}
+
+.footer-links-row {
+  display: contents;
+}
+
+.footer-column--dock {
+  align-items: flex-end;
+}
+

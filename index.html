@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Portafolio de Mauricio Andrés Fuentes Bustamante, ingeniero informático y administrador de empresas desde Viña del Mar, Chile.">
+  <title>Mauricio Andrés | Developer Profile</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Rajdhani:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="./assets/css/base.css">
+  <link rel="stylesheet" href="./assets/css/effects.css">
+  <link rel="stylesheet" href="./assets/css/animations.css">
+  <link rel="icon" href="./assets/img/favicon.svg" type="image/svg+xml">
+</head>
+
+<body
+  class="min-h-screen snap-y snap-mandatory bg-[radial-gradient(circle_at_top,rgba(57,28,123,0.5),transparent_30%),radial-gradient(circle_at_80%_15%,rgba(0,214,255,0.12),transparent_18%),linear-gradient(180deg,#07020f_0%,#090415_45%,#05020d_100%)] font-['Rajdhani'] text-[var(--text)]">
+  <div class="relative overflow-x-hidden">
+    <div class="bg-orb orb-a"></div>
+    <div class="bg-orb orb-b"></div>
+    <div class="bg-smoke" data-smoke-background aria-hidden="true"></div>
+    <div class="bg-grid"></div>
+    <div class="app-toast" data-app-toast aria-live="polite" aria-atomic="true" hidden></div>
+    <div data-floating-github-host>
+      <a class="floating-github" href="https://github.com/maufuenb" target="_blank" rel="noreferrer"
+        data-floating-github data-github-follow-link aria-label="Ver seguidores en GitHub">
+        <span class="floating-github__badge">
+          <img class="h-5 w-5 shrink-0" src="https://cdn.simpleicons.org/github/F5F5F5" alt="GitHub">
+        </span>
+
+        <span class="floating-github__content flex min-w-[5.75rem] flex-col leading-none">
+          <span class="font-['Orbitron'] text-[0.68rem] uppercase tracking-[0.18em] text-[var(--muted)]">GitHub</span>
+          <span class="mt-1 text-[0.9rem] text-cyan-100" data-github-followers data-github-followers-format="compact"
+            aria-busy="true">
+            Cargando...
+          </span>
+        </span>
+      </a>
+    </div>
+    <div data-floating-player-host>
+      <div class="floating-player" data-floating-player>
+        <div class="floating-player__panel">
+          <div class="floating-player__bar"></div>
+          <div class="floating-player__summary">
+        <div class="music-turntable shrink-0">
+          <div class="music-disc" data-soundcloud-disc>
+            <div class="music-disc__grooves" aria-hidden="true"></div>
+            <div class="music-disc__image" data-soundcloud-artwork aria-hidden="true"></div>
+            <div class="music-disc__label" aria-hidden="true"></div>
+            <div class="music-disc__spindle" aria-hidden="true"></div>
+          </div>
+          <div class="music-tonearm" data-soundcloud-tonearm aria-hidden="true">
+            <div class="music-tonearm__pivot"></div>
+            <div class="music-tonearm__arm"></div>
+            <div class="music-tonearm__counterweight"></div>
+            <div class="music-tonearm__headshell">
+              <div class="music-tonearm__cartridge"></div>
+              <div class="music-tonearm__stylus"></div>
+            </div>
+          </div>
+        </div>
+        <div class="floating-player__details min-w-0 flex-1">
+          <p class="m-0 font-['Orbitron'] text-[0.7rem] uppercase tracking-[0.18em] text-cyan-300">SoundCloud Music</p>
+          <p class="mt-2 truncate font-['Orbitron'] text-[0.98rem] text-white" data-soundcloud-title></p>
+          <p class="mt-1 truncate text-[0.92rem] text-[var(--muted)]" data-soundcloud-artist></p>
+        </div>
+      </div>
+      <div class="floating-player__controls px-4 pb-4">
+        <p class="m-0 text-[0.82rem] text-cyan-100/80" data-soundcloud-status>Inicializando reproductor...</p>
+        <div class="floating-player__actions mt-4 flex items-center gap-3">
+          <button
+            class="floating-player__icon-button floating-player__icon-button--secondary"
+            type="button" data-soundcloud-prev aria-label="Anterior">
+            <span aria-hidden="true">⏮</span>
+          </button>
+          <button
+            class="floating-player__icon-button floating-player__icon-button--primary"
+            type="button" data-soundcloud-play aria-label="Reproducir">
+            <span aria-hidden="true">▶</span>
+          </button>
+          <button
+            class="floating-player__icon-button floating-player__icon-button--secondary"
+            type="button" data-soundcloud-next aria-label="Siguiente">
+            <span aria-hidden="true">⏭</span>
+          </button>
+          <label class="floating-player__volume ml-auto flex items-center gap-2 text-[0.78rem] uppercase tracking-[0.12em] text-[var(--muted)]">
+            <span class="floating-player__volume-label">Vol</span>
+            <input class="floating-player__volume-input" type="range" min="0" max="100" value="10" data-soundcloud-volume
+              aria-label="Volumen">
+          </label>
+        </div>
+      </div>
+        </div>
+      </div>
+      <iframe class="pointer-events-none absolute -left-[9999px] top-0 h-[166px] w-[320px] overflow-hidden opacity-0" title="SoundCloud player"
+        data-soundcloud-iframe
+        src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/downtownbinary/downtown-binary-the-present&auto_play=false&buying=false&sharing=false&download=false&show_artwork=false&show_playcount=false&show_user=false&show_comments=false&show_teaser=false&visual=false&single_active=false&color=%2348f3ff"
+        allow="autoplay; encrypted-media"></iframe>
+    </div>
+
+    <header
+      class="fixed inset-x-0 top-0 z-20 border-b border-white/8 bg-[linear-gradient(180deg,rgba(7,10,22,0.82),rgba(7,10,22,0.52))] shadow-[0_12px_28px_rgba(0,0,0,0.14)] backdrop-blur-[16px]">
+      <div class="mx-auto max-w-[1240px] px-[1.1rem] md:px-6">
+        <div data-component="header"></div>
+      </div>
+    </header>
+
+    <main id="top"
+      class="relative z-10 mx-auto flex max-w-[1240px] flex-col px-[1.1rem] pb-8 pt-[var(--header-offset)] md:px-6">
+      <div data-component="hero"></div>
+      <div id="perfil" data-component="profile"></div>
+      <div id="stack" data-component="stack"></div>
+      <div id="proyectos-publicos" data-component="projects-public"></div>
+      <div id="productos-propios" data-component="projects-products"></div>
+      <div id="beyond-code" data-component="beyond"></div>
+      <div id="contacto" data-component="contact"></div>
+    </main>
+  </div>
+
+  <div data-component="footer"></div>
+
+  <script type="module" src="./assets/js/main.js"></script>
+</body>
+
+</html>

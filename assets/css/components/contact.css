@@ -1,0 +1,122 @@
+.contact-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-card::before {
+  content: "";
+  position: absolute;
+  right: -3rem;
+  bottom: -4rem;
+  width: 16rem;
+  height: 16rem;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(72, 243, 255, 0.24), transparent 60%);
+}
+
+.contact-card--hero {
+  background:
+    radial-gradient(circle at top right, rgba(72, 243, 255, 0.14), transparent 24%),
+    radial-gradient(circle at 18% 10%, rgba(255, 72, 199, 0.14), transparent 32%),
+    linear-gradient(180deg, rgba(16, 12, 29, 0.88), rgba(9, 7, 20, 0.98));
+}
+
+.contact-tile {
+  position: relative;
+  display: flex;
+  min-height: 10.75rem;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.9rem;
+  overflow: hidden;
+  border-color: rgba(72, 243, 255, 0.1);
+  background:
+    linear-gradient(180deg, rgba(16, 12, 29, 0.84), rgba(9, 7, 20, 0.96));
+  transition:
+    transform 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.contact-tile::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(72, 243, 255, 0.68), transparent);
+  opacity: 0.9;
+}
+
+.contact-tile:hover {
+  transform: translateY(-3px);
+  border-color: rgba(72, 243, 255, 0.24);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 18px 32px rgba(0, 0, 0, 0.24),
+    0 0 18px rgba(72, 243, 255, 0.08);
+}
+
+.contact-tile > * {
+  position: relative;
+  z-index: 1;
+}
+
+.contact-tile--status {
+  background:
+    radial-gradient(circle at 85% 20%, rgba(255, 72, 199, 0.12), transparent 28%),
+    linear-gradient(180deg, rgba(16, 12, 29, 0.84), rgba(9, 7, 20, 0.96));
+}
+
+.contact-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: min(32rem, calc(100vw - 2rem));
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  transform: translate(-50%, -50%);
+}
+
+.contact-modal::backdrop {
+  background: rgba(4, 6, 16, 0.78);
+  backdrop-filter: blur(10px);
+}
+
+.contact-modal__surface {
+  position: relative;
+  padding: 1.75rem;
+  border: 1px solid rgba(72, 243, 255, 0.18);
+  border-radius: 1.6rem;
+  background:
+    radial-gradient(circle at top right, rgba(72, 243, 255, 0.12), transparent 28%),
+    radial-gradient(circle at 16% 12%, rgba(255, 72, 199, 0.12), transparent 34%),
+    linear-gradient(180deg, rgba(16, 12, 29, 0.96), rgba(9, 7, 20, 0.98));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 28px 56px rgba(0, 0, 0, 0.34);
+}
+
+.contact-modal__close {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  width: 2.4rem;
+  height: 2.4rem;
+  border: 1px solid rgba(72, 243, 255, 0.18);
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.contact-modal__close:hover,
+.contact-modal__close:focus-visible {
+  color: var(--cyan);
+  border-color: rgba(72, 243, 255, 0.42);
+  background: rgba(72, 243, 255, 0.08);
+}
+

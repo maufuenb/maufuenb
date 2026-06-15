@@ -110,7 +110,7 @@ Y cuando necesito salir de la pantalla, conecto mucho con el trekking, el cerro,
 ## `> building.brands`
 
 <div align="center">
-  <img src="./assets/kiveron-logo.png" alt="Kiveron Logo" width="170" />
+  <img src="./assets/img/logos/kiveron-logo.png" alt="Kiveron Logo" width="170" />
 </div>
 
 <div align="center">

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="M favicon">
+  <defs>
+    <linearGradient id="bg" x1="10" y1="8" x2="54" y2="56" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#48f3ff" stop-opacity="0.2"/>
+      <stop offset="1" stop-color="#ff48c7" stop-opacity="0.24"/>
+    </linearGradient>
+    <linearGradient id="mark" x1="18" y1="18" x2="46" y2="46" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7ef7ff"/>
+      <stop offset="1" stop-color="#48f3ff"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="5.5" y="5.5" width="53" height="53" rx="16" fill="#090612"/>
+  <rect x="5.5" y="5.5" width="53" height="53" rx="16" fill="url(#bg)"/>
+  <rect x="5.5" y="5.5" width="53" height="53" rx="16" fill="none" stroke="#48f3ff" stroke-opacity="0.2"/>
+  <rect x="7.5" y="7.5" width="49" height="49" rx="14" fill="none" stroke="#ffffff" stroke-opacity="0.05"/>
+
+  <path
+    d="M18 46V18h7.2L32 28.2 38.8 18H46v28h-6.8V28.8L32 39.2 24.8 28.8V46Z"
+    fill="url(#mark)"
+  />
+</svg>

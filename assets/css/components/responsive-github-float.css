@@ -1,0 +1,34 @@
+@media (max-width: 639px) {
+  .floating-github {
+    left: 1rem;
+    top: auto;
+    bottom: 1rem;
+    transform: none;
+  }
+
+  .floating-github:hover {
+    transform: translateY(-2px);
+  }
+
+  .floating-github.is-docked {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 1023px) {
+  .floating-github:not(.is-docked) {
+    display: none;
+  }
+
+  .floating-github {
+    left: 1rem;
+    right: 1rem;
+    top: auto;
+    bottom: 1rem;
+    width: auto;
+    max-width: calc(100vw - 2rem);
+    justify-content: center;
+    transform: none;
+  }
+}

@@ -1,0 +1,15 @@
+@media (max-width: 1023px) {
+  .contact-tile--hidden {
+    display: none !important;
+  }
+
+  .contact-tile__value {
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 639px) {
+  .contact-tile--hidden {
+    display: none !important;
+  }
+}

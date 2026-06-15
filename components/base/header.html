@@ -1,0 +1,57 @@
+<header class="flex w-full flex-col gap-3 px-0 py-3 lg:flex-row lg:items-center lg:justify-between lg:gap-4 lg:py-4">
+  <div class="flex w-full items-center justify-between gap-4 lg:w-auto lg:justify-start">
+    <a class="inline-flex items-center gap-4 text-inherit no-underline" href="#top">
+      <span
+        class="grid h-11 w-11 place-items-center rounded-2xl border border-cyan-300/30 bg-[linear-gradient(135deg,rgba(72,243,255,0.25),rgba(255,72,199,0.28))] font-['Orbitron'] text-lg font-extrabold text-cyan-300 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04)]">
+        M
+      </span>
+      <span class="flex flex-col leading-none">
+        <strong class="font-['Orbitron'] text-[0.96rem] uppercase tracking-[0.08em] text-white">
+          Mauricio Andrés
+        </strong>
+        <small class="mt-1.5 font-['Orbitron'] text-[0.62rem] uppercase tracking-[0.14em] text-[var(--muted)]">
+          Developer Profile
+        </small>
+      </span>
+    </a>
+
+    <button
+      class="nav-toggle relative hidden h-[3.2rem] w-[3.2rem] flex-col items-center justify-center gap-[0.34rem] rounded-[1rem] border border-cyan-300/22 bg-[linear-gradient(180deg,rgba(7,10,22,0.92),rgba(10,12,24,0.98))] p-0 shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_14px_28px_rgba(0,0,0,0.2)] transition-[border-color,box-shadow,transform,background-color] duration-[220ms]"
+      type="button"
+      aria-label="Abrir menu principal"
+      aria-expanded="false"
+      aria-controls="primary-navigation"
+      data-nav-toggle>
+      <span class="nav-toggle__line block h-[2px] w-5 rounded-full bg-[linear-gradient(90deg,rgba(245,245,245,0.94),rgba(72,243,255,0.92))] transition-[transform,opacity,background] duration-[220ms]"></span>
+      <span class="nav-toggle__line block h-[2px] w-5 rounded-full bg-[linear-gradient(90deg,rgba(245,245,245,0.94),rgba(72,243,255,0.92))] transition-[transform,opacity,background] duration-[220ms]"></span>
+      <span class="nav-toggle__line block h-[2px] w-5 rounded-full bg-[linear-gradient(90deg,rgba(245,245,245,0.94),rgba(72,243,255,0.92))] transition-[transform,opacity,background] duration-[220ms]"></span>
+    </button>
+  </div>
+
+  <nav
+    id="primary-navigation"
+    class="nav-menu mt-2 flex flex-wrap items-center justify-center gap-3 text-[0.98rem] tracking-[0.04em] text-[var(--muted)] lg:mt-0 lg:gap-[1.15rem]"
+    data-nav-menu>
+    <a class="transition-colors duration-200 hover:text-cyan-300 focus-visible:text-cyan-300" href="#perfil">Perfil</a>
+    <a class="transition-colors duration-200 hover:text-cyan-300 focus-visible:text-cyan-300" href="#stack">Stack</a>
+    <div class="nav-dropdown group relative flex items-center" data-nav-dropdown>
+      <button
+        class="nav-dropdown__trigger inline-flex items-center gap-2 bg-transparent p-0 transition-colors duration-200 hover:text-cyan-300 focus-visible:text-cyan-300"
+        type="button" aria-haspopup="true" aria-expanded="false" data-nav-dropdown-trigger>
+        Proyectos
+        <span class="nav-dropdown__caret" aria-hidden="true"></span>
+      </button>
+
+      <div class="nav-dropdown__panel" data-nav-dropdown-panel>
+        <a class="nav-dropdown__link relative flex items-center justify-between gap-[0.85rem] rounded-[0.8rem] border border-white/6 bg-[linear-gradient(135deg,rgba(72,243,255,0.08),rgba(255,72,199,0.08))] px-[0.85rem] py-[0.72rem] font-['Orbitron'] text-[0.68rem] uppercase tracking-[0.12em] text-[var(--text)] transition-[color,border-color,background-color,transform,box-shadow] duration-200" href="#proyectos-publicos">Publicos</a>
+        <a class="nav-dropdown__link relative flex items-center justify-between gap-[0.85rem] rounded-[0.8rem] border border-white/6 bg-[linear-gradient(135deg,rgba(72,243,255,0.08),rgba(255,72,199,0.08))] px-[0.85rem] py-[0.72rem] font-['Orbitron'] text-[0.68rem] uppercase tracking-[0.12em] text-[var(--text)] transition-[color,border-color,background-color,transform,box-shadow] duration-200" href="#productos-propios">Propios</a>
+      </div>
+    </div>
+    <a class="transition-colors duration-200 hover:text-cyan-300 focus-visible:text-cyan-300"
+      href="#beyond-code">Beyond</a>
+    <a class="transition-colors duration-200 hover:text-cyan-300 focus-visible:text-cyan-300"
+      href="#contacto">Contacto</a>
+    <a class="transition-colors duration-200 hover:text-cyan-300 focus-visible:text-cyan-300 lg:hidden"
+      href="#reproductor-footer">Reproductor</a>
+  </nav>
+</header>

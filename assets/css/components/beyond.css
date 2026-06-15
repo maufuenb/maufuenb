@@ -1,0 +1,43 @@
+.beyond-card {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.beyond-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.beyond-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.beyond-card--story {
+  background:
+    radial-gradient(circle at top left, rgba(255, 72, 199, 0.14), transparent 30%),
+    radial-gradient(circle at 85% 20%, rgba(72, 243, 255, 0.08), transparent 24%),
+    linear-gradient(180deg, rgba(16, 12, 29, 0.86), rgba(9, 7, 20, 0.98));
+}
+
+.beyond-card--story::before {
+  background:
+    linear-gradient(130deg, rgba(255, 255, 255, 0.03), transparent 35%),
+    repeating-linear-gradient(
+      135deg,
+      rgba(72, 243, 255, 0.04) 0 1px,
+      transparent 1px 22px
+    );
+  opacity: 0.8;
+}
+
+.beyond-card--grid {
+  background:
+    radial-gradient(circle at top right, rgba(72, 243, 255, 0.14), transparent 28%),
+    linear-gradient(180deg, rgba(16, 12, 29, 0.86), rgba(9, 7, 20, 0.98));
+}
+

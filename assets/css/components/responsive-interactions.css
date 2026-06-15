@@ -1,0 +1,6 @@
+@media (max-width: 1023px) {
+  [data-stack-carousel],
+  [data-project-carousel] {
+    touch-action: pan-y;
+  }
+}
