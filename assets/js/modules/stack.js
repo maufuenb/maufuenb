@@ -68,15 +68,26 @@ function initStackCarousel() {
       const offset = slideIndex - activeIndex;
       const distance = Math.abs(offset);
       const direction = offset === 0 ? 0 : Math.sign(offset);
-      const translateX = direction * Math.min(isCompactViewport ? 92 : 140, (isCompactViewport ? 32 : 54) + distance * (isCompactViewport ? 18 : 28));
-      const translateY = distance * (isCompactViewport ? 5 : 8);
-      const rotate = direction * Math.min(isCompactViewport ? 6 : 10, (isCompactViewport ? 2 : 4) + distance * 2);
-      const scale = Math.max(isCompactViewport ? 0.88 : 0.78, 1 - distance * (isCompactViewport ? 0.05 : 0.08));
-      const opacity = Math.max(0, 1 - distance * 0.24);
+      const translateX = direction * Math.min(
+        isCompactViewport ? 84 : 122,
+        (isCompactViewport ? 28 : 44) + distance * (isCompactViewport ? 14 : 22)
+      );
+      const translateY = distance * (isCompactViewport ? 3 : 5);
+      const rotate = direction * Math.min(
+        isCompactViewport ? 4.5 : 7,
+        (isCompactViewport ? 1.6 : 2.6) + distance * 1.4
+      );
+      const scale = Math.max(
+        isCompactViewport ? 0.91 : 0.84,
+        1 - distance * (isCompactViewport ? 0.04 : 0.06)
+      );
+      const opacity = Math.max(0.2, 1 - distance * 0.18);
       const zIndex = slides.length - distance;
       const dragTranslateX = dragOffset * (isCompactViewport ? 82 : 110);
-      const currentTranslateX = isActive ? dragTranslateX : translateX + dragTranslateX;
-      const dragRotate = dragOffset * (isCompactViewport ? 3.5 : 5);
+      const currentTranslateX = isActive
+        ? dragTranslateX
+        : translateX + dragTranslateX * 0.92;
+      const dragRotate = dragOffset * (isCompactViewport ? 2.2 : 3.2);
 
       slide.setAttribute("aria-hidden", String(!isActive));
       slide.style.zIndex = String(zIndex);
@@ -88,11 +99,11 @@ function initStackCarousel() {
       slide.style.transition =
         isDragging
           ? "none"
-          : "transform 420ms cubic-bezier(0.22,1,0.36,1), opacity 260ms ease";
+          : "transform 520ms cubic-bezier(0.2,0.9,0.22,1), opacity 320ms ease";
 
       if (module) {
         module.dataset.active = String(isActive);
-        module.style.opacity = isActive ? "1" : "0.88";
+        module.style.opacity = isActive ? "1" : "0.94";
       }
 
       dots[slideIndex].style.opacity = isActive ? "1" : "0.55";
