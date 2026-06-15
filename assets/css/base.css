@@ -269,11 +269,54 @@ main > [data-component] > section {
   main > [data-component] > section {
     overflow: visible;
   }
+
+  .bg-smoke {
+    display: none;
+  }
+
+  .bg-orb {
+    opacity: 0.14;
+    filter: blur(54px);
+  }
+
+  .bg-grid {
+    left: -6%;
+    right: -6%;
+    top: 48%;
+    bottom: -18%;
+    opacity: 0.68;
+    transform: perspective(780px) rotateX(76deg) scale(1.7);
+    animation-duration: 2.4s;
+  }
+
+  .surface-panel,
+  .surface-card {
+    backdrop-filter: blur(10px);
+  }
 }
 
 @media (max-width: 767px) {
   :root {
     --header-offset: 8.9rem;
+  }
+
+  .bg-orb {
+    opacity: 0.1;
+    filter: blur(42px);
+  }
+
+  .bg-grid {
+    left: -2%;
+    right: -2%;
+    top: 52%;
+    bottom: -10%;
+    opacity: 0.56;
+    transform: perspective(700px) rotateX(74deg) scale(1.45);
+  }
+
+  .surface-panel,
+  .surface-card {
+    backdrop-filter: blur(8px);
   }
 }
 

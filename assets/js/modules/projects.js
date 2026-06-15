@@ -14,8 +14,11 @@ function initProjectCarousel(root) {
   }
 
   let activeIndex = 0;
-  let touchStartX = 0;
-  let touchStartY = 0;
+  let dragStartX = 0;
+  let dragStartY = 0;
+  let dragDeltaX = 0;
+  let isDragging = false;
+  let activePointerId = null;
 
   const dots = slides.map((_, index) => {
     const dot = document.createElement("button");
@@ -85,7 +88,7 @@ function initProjectCarousel(root) {
     });
   };
 
-  function updateCarousel(index) {
+  function updateCarousel(index, dragOffset = 0) {
     activeIndex = Math.min(Math.max(index, 0), slides.length - 1);
     const viewportWidth = window.innerWidth;
     const isCompactViewport = viewportWidth <= TABLET_BREAKPOINT;
@@ -127,11 +130,18 @@ function initProjectCarousel(root) {
       slide.style.zIndex = String(zIndex);
       slide.style.pointerEvents = isActive ? "auto" : "none";
       slide.style.opacity = String(opacity);
+
+      const dragTranslateX = dragOffset * (isMobileViewport ? 82 : 110);
+      const currentTranslateX = isActive ? dragTranslateX : translateX + dragTranslateX;
+      const dragRotate = dragOffset * (isMobileViewport ? 3.5 : 5);
+
       slide.style.transform = isActive
-        ? "translate3d(0, 0, 0) scale(1)"
-        : `translate3d(${translateX}px, ${translateY}px, 0) rotate(${rotate}deg) scale(${scale})`;
+        ? `translate3d(${currentTranslateX}px, 0, 0) rotate(${dragRotate}deg) scale(1)`
+        : `translate3d(${currentTranslateX}px, ${translateY}px, 0) rotate(${rotate + dragRotate}deg) scale(${scale})`;
       slide.style.transition =
-        "transform 500ms cubic-bezier(0.22,1,0.36,1), opacity 320ms ease";
+        isDragging
+          ? "none"
+          : "transform 420ms cubic-bezier(0.22,1,0.36,1), opacity 260ms ease";
 
       if (article) {
         article.dataset.active = String(isActive);
@@ -160,36 +170,89 @@ function initProjectCarousel(root) {
     updateCarousel(activeIndex + 1);
   });
 
-  carousel.addEventListener("touchstart", (event) => {
-    if (window.innerWidth > TABLET_BREAKPOINT || !event.touches.length) {
+  const beginDrag = (clientX, clientY, pointerId = null) => {
+    if (window.innerWidth > TABLET_BREAKPOINT) {
       return;
     }
 
-    touchStartX = event.touches[0].clientX;
-    touchStartY = event.touches[0].clientY;
-  }, { passive: true });
+    dragStartX = clientX;
+    dragStartY = clientY;
+    dragDeltaX = 0;
+    isDragging = true;
+    activePointerId = pointerId;
+  };
 
-  carousel.addEventListener("touchend", (event) => {
-    if (window.innerWidth > TABLET_BREAKPOINT || !event.changedTouches.length) {
+  const moveDrag = (clientX, clientY) => {
+    if (!isDragging || window.innerWidth > TABLET_BREAKPOINT) {
       return;
     }
 
-    const deltaX = event.changedTouches[0].clientX - touchStartX;
-    const deltaY = event.changedTouches[0].clientY - touchStartY;
+    const deltaX = clientX - dragStartX;
+    const deltaY = clientY - dragStartY;
 
-    if (Math.abs(deltaX) < 45 || Math.abs(deltaX) <= Math.abs(deltaY)) {
+    if (Math.abs(deltaY) > Math.abs(deltaX) && Math.abs(deltaY) > 14) {
+      isDragging = false;
+      activePointerId = null;
+      updateCarousel(activeIndex);
       return;
     }
 
-    if (deltaX < 0) {
+    dragDeltaX = deltaX;
+    const dragOffset = clamp(deltaX / Math.max(carousel.clientWidth || 1, 1), -0.75, 0.75);
+    updateCarousel(activeIndex, dragOffset);
+  };
+
+  const endDrag = () => {
+    if (!isDragging) {
+      return;
+    }
+
+    const dragOffset = dragDeltaX / Math.max(carousel.clientWidth || 1, 1);
+    isDragging = false;
+    activePointerId = null;
+
+    if (dragOffset <= -0.18) {
       updateCarousel(activeIndex + 1);
       return;
     }
 
-    updateCarousel(activeIndex - 1);
-  }, { passive: true });
+    if (dragOffset >= 0.18) {
+      updateCarousel(activeIndex - 1);
+      return;
+    }
+
+    updateCarousel(activeIndex);
+  };
+
+  carousel.addEventListener("pointerdown", (event) => {
+    beginDrag(event.clientX, event.clientY, event.pointerId);
+  });
+
+  carousel.addEventListener("pointermove", (event) => {
+    if (activePointerId !== event.pointerId) {
+      return;
+    }
+
+    moveDrag(event.clientX, event.clientY);
+  });
+
+  carousel.addEventListener("pointerup", (event) => {
+    if (activePointerId !== event.pointerId) {
+      return;
+    }
+
+    endDrag();
+  });
+
+  carousel.addEventListener("pointercancel", () => {
+    isDragging = false;
+    activePointerId = null;
+    updateCarousel(activeIndex);
+  });
 
   window.addEventListener("resize", () => {
+    isDragging = false;
+    activePointerId = null;
     updateCarousel(activeIndex);
   });
 

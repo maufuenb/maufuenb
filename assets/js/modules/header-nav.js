@@ -88,6 +88,31 @@ export function initHeaderNav() {
   window.addEventListener("resize", syncDesktopState);
 
   document.addEventListener("click", (event) => {
+    if (window.innerWidth > NAV_COLLAPSE_BREAKPOINT) {
+      return;
+    }
+
+    if (header.contains(event.target)) {
+      return;
+    }
+
+    closeMenu();
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") {
+      return;
+    }
+
+    if (window.innerWidth > NAV_COLLAPSE_BREAKPOINT) {
+      closeDropdown();
+      return;
+    }
+
+    closeMenu();
+  });
+
+  document.addEventListener("click", (event) => {
     if (window.innerWidth > NAV_COLLAPSE_BREAKPOINT || !dropdown) {
       return;
     }

@@ -57,7 +57,11 @@ function randomBetween(min, max) {
 export function initSmokeBackground() {
   const host = document.querySelector("[data-smoke-background]");
 
-  if (!host || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  if (
+    !host ||
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+    window.matchMedia("(max-width: 1023px)").matches
+  ) {
     return;
   }
 

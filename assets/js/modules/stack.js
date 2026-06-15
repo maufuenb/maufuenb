@@ -8,6 +8,10 @@ function clampProgress(value) {
   return Math.min(Math.max(numericValue, 0), 100);
 }
 
+function clampRange(value, min, max) {
+  return Math.min(Math.max(value, min), max);
+}
+
 function updateMeter(module, progress) {
   const meter = module.querySelector("[data-stack-meter]");
   const meterValue = module.querySelector("[data-stack-meter-value]");
@@ -35,8 +39,11 @@ function initStackCarousel() {
   }
 
   let activeIndex = 0;
-  let touchStartX = 0;
-  let touchStartY = 0;
+  let dragStartX = 0;
+  let dragStartY = 0;
+  let dragDeltaX = 0;
+  let isDragging = false;
+  let activePointerId = null;
 
   const dots = slides.map((_, index) => {
     const dot = document.createElement("button");
@@ -51,7 +58,7 @@ function initStackCarousel() {
     return dot;
   });
 
-  function updateCarousel(index) {
+  function updateCarousel(index, dragOffset = 0) {
     activeIndex = Math.min(Math.max(index, 0), slides.length - 1);
     const isCompactViewport = window.innerWidth <= MOBILE_BREAKPOINT;
 
@@ -67,16 +74,21 @@ function initStackCarousel() {
       const scale = Math.max(isCompactViewport ? 0.88 : 0.78, 1 - distance * (isCompactViewport ? 0.05 : 0.08));
       const opacity = Math.max(0, 1 - distance * 0.24);
       const zIndex = slides.length - distance;
+      const dragTranslateX = dragOffset * (isCompactViewport ? 82 : 110);
+      const currentTranslateX = isActive ? dragTranslateX : translateX + dragTranslateX;
+      const dragRotate = dragOffset * (isCompactViewport ? 3.5 : 5);
 
       slide.setAttribute("aria-hidden", String(!isActive));
       slide.style.zIndex = String(zIndex);
       slide.style.pointerEvents = isActive ? "auto" : "none";
       slide.style.opacity = String(opacity);
       slide.style.transform = isActive
-        ? "translate3d(0, 0, 0) scale(1)"
-        : `translate3d(${translateX}px, ${translateY}px, 0) rotate(${rotate}deg) scale(${scale})`;
+        ? `translate3d(${currentTranslateX}px, 0, 0) rotate(${dragRotate}deg) scale(1)`
+        : `translate3d(${currentTranslateX}px, ${translateY}px, 0) rotate(${rotate + dragRotate}deg) scale(${scale})`;
       slide.style.transition =
-        "transform 500ms cubic-bezier(0.22,1,0.36,1), opacity 320ms ease";
+        isDragging
+          ? "none"
+          : "transform 420ms cubic-bezier(0.22,1,0.36,1), opacity 260ms ease";
 
       if (module) {
         module.dataset.active = String(isActive);
@@ -105,36 +117,93 @@ function initStackCarousel() {
     updateCarousel(activeIndex + 1);
   });
 
-  carousel.addEventListener("touchstart", (event) => {
-    if (window.innerWidth > MOBILE_BREAKPOINT || !event.touches.length) {
+  const beginDrag = (clientX, clientY, pointerId = null) => {
+    if (window.innerWidth > MOBILE_BREAKPOINT) {
       return;
     }
 
-    touchStartX = event.touches[0].clientX;
-    touchStartY = event.touches[0].clientY;
-  }, { passive: true });
+    dragStartX = clientX;
+    dragStartY = clientY;
+    dragDeltaX = 0;
+    isDragging = true;
+    activePointerId = pointerId;
+  };
 
-  carousel.addEventListener("touchend", (event) => {
-    if (window.innerWidth > MOBILE_BREAKPOINT || !event.changedTouches.length) {
+  const moveDrag = (clientX, clientY) => {
+    if (!isDragging || window.innerWidth > MOBILE_BREAKPOINT) {
       return;
     }
 
-    const deltaX = event.changedTouches[0].clientX - touchStartX;
-    const deltaY = event.changedTouches[0].clientY - touchStartY;
+    const deltaX = clientX - dragStartX;
+    const deltaY = clientY - dragStartY;
 
-    if (Math.abs(deltaX) < 45 || Math.abs(deltaX) <= Math.abs(deltaY)) {
+    if (Math.abs(deltaY) > Math.abs(deltaX) && Math.abs(deltaY) > 14) {
+      isDragging = false;
+      activePointerId = null;
+      updateCarousel(activeIndex);
       return;
     }
 
-    if (deltaX < 0) {
+    dragDeltaX = deltaX;
+    const signedOffset = clampRange(
+      deltaX / Math.max(carousel.clientWidth || 1, 1),
+      -0.75,
+      0.75
+    );
+    updateCarousel(activeIndex, signedOffset);
+  };
+
+  const endDrag = () => {
+    if (!isDragging) {
+      return;
+    }
+
+    const dragOffset = dragDeltaX / Math.max(carousel.clientWidth || 1, 1);
+    isDragging = false;
+    activePointerId = null;
+
+    if (dragOffset <= -0.18) {
       updateCarousel(activeIndex + 1);
       return;
     }
 
-    updateCarousel(activeIndex - 1);
-  }, { passive: true });
+    if (dragOffset >= 0.18) {
+      updateCarousel(activeIndex - 1);
+      return;
+    }
+
+    updateCarousel(activeIndex);
+  };
+
+  carousel.addEventListener("pointerdown", (event) => {
+    beginDrag(event.clientX, event.clientY, event.pointerId);
+  });
+
+  carousel.addEventListener("pointermove", (event) => {
+    if (activePointerId !== event.pointerId) {
+      return;
+    }
+
+    moveDrag(event.clientX, event.clientY);
+  });
+
+  carousel.addEventListener("pointerup", (event) => {
+    if (activePointerId !== event.pointerId) {
+      return;
+    }
+
+    endDrag();
+  });
+
+  carousel.addEventListener("pointercancel", () => {
+    isDragging = false;
+    activePointerId = null;
+    updateCarousel(activeIndex);
+  });
 
   window.addEventListener("resize", () => {
+    isDragging = false;
+    activePointerId = null;
     updateCarousel(activeIndex);
   });
 

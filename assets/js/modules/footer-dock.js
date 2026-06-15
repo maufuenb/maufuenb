@@ -26,6 +26,9 @@ export function initFooterDock() {
 
   let isDocked = false;
 
+  githubWidget.dataset.dockReady = "false";
+  playerWidget.dataset.dockReady = "false";
+
   const moveWidget = (widget, target) => {
     if (widget.parentElement !== target) {
       target.appendChild(widget);
@@ -55,12 +58,16 @@ export function initFooterDock() {
   const syncDockState = () => {
     if (window.innerWidth <= MOBILE_BREAKPOINT) {
       setDocked(true);
+      githubWidget.dataset.dockReady = "true";
+      playerWidget.dataset.dockReady = "true";
       return;
     }
 
     const rect = footerShell.getBoundingClientRect();
     const shouldDock = rect.top <= window.innerHeight - 120;
     setDocked(shouldDock);
+    githubWidget.dataset.dockReady = "true";
+    playerWidget.dataset.dockReady = "true";
   };
 
   window.addEventListener("scroll", syncDockState, { passive: true });

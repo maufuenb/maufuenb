@@ -1,4 +1,9 @@
 @media (max-width: 639px) {
+  .floating-player[data-dock-ready="false"] {
+    opacity: 0;
+    visibility: hidden;
+  }
+
   .floating-player {
     left: 1rem;
     top: auto;
@@ -7,6 +12,11 @@
 }
 
 @media (max-width: 1023px) {
+  .floating-player[data-dock-ready="false"] {
+    opacity: 0;
+    visibility: hidden;
+  }
+
   .floating-player {
     left: 1rem;
     right: 1rem;
