@@ -12,6 +12,11 @@
   <img src="https://readme-typing-svg.demolab.com?font=Rajdhani&weight=700&size=24&pause=1000&color=00F7FF&center=true&vCenter=true&width=900&lines=Ingeniero+Inform%C3%A1tico;Administrador+de+Empresas;Desde+Vi%C3%B1a+del+Mar%2C+Chile;Construyendo+ideas+con+c%C3%B3digo%2C+visi%C3%B3n+y+estrategia" alt="Typing SVG" />
 </div>
 
+<div align="center">
+  <strong>Visita mi portafolio web:</strong><br>
+  <a href="https://maufuenb.github.io/maufuenb/">https://maufuenb.github.io/maufuenb/</a>
+</div>
+
 ---
 
 ## `> whoami`
