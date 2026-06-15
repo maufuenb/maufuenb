@@ -92,9 +92,19 @@
     align-items: center;
   }
 
+  .nav-dropdown:hover .nav-dropdown__panel,
+  .nav-dropdown:focus-within .nav-dropdown__panel {
+    transform: none;
+  }
+
   .nav-dropdown__panel::before,
   .nav-dropdown__panel::after {
     display: none;
+  }
+
+  .nav-dropdown:hover .nav-dropdown__caret,
+  .nav-dropdown:focus-within .nav-dropdown__caret {
+    transform: translateY(-0.05rem) rotate(45deg);
   }
 
   .nav-dropdown[data-dropdown-open="false"] .nav-dropdown__caret {
