@@ -3,6 +3,7 @@ import { initContactModal } from "./modules/contact-modal.js";
 import { initFooterDock } from "./modules/footer-dock.js";
 import { initHeaderNav } from "./modules/header-nav.js";
 import { initGitHubProfile } from "./modules/github-profile.js";
+import { initInternalNavigation } from "./modules/internal-navigation.js";
 import { initRevealAnimations } from "./modules/reveal.js";
 import { initProjectCardEffects } from "./modules/projects.js";
 import { initSoundCloudPlayer } from "./modules/soundcloud-player.js";
@@ -26,6 +27,7 @@ async function initPage() {
     await initGitHubProfile();
     await initSoundCloudPlayer();
     initHeaderNav();
+    initInternalNavigation();
     initContactModal();
     initFooterDock();
     initRevealAnimations();
