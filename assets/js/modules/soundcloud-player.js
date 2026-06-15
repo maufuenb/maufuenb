@@ -232,6 +232,7 @@ export async function initSoundCloudPlayer() {
   let hasPlaybackStarted = false;
   let autoplayFallbackTimeoutId = null;
   let hasShownAutoplayToast = false;
+  let activeLoadRequestId = 0;
   const initialTrackIndex = getRandomTrackIndex();
   const disc = document.querySelector("[data-soundcloud-disc]");
 
@@ -338,6 +339,7 @@ export async function initSoundCloudPlayer() {
     trackIndex,
     { autoplay = false, showAutoplayFallbackToast = false } = {}
   ) => {
+    const loadRequestId = ++activeLoadRequestId;
     const track = soundCloudPlaylist[trackIndex];
     const shouldAutoplay = autoplay;
 
@@ -347,25 +349,32 @@ export async function initSoundCloudPlayer() {
     setDiscPlaying(false);
     updateTrackUi(track);
     updateTonearmProgress(0, { isResting: true });
+    updatePlayButton(false);
     setPlayerStatus("Cargando desde SoundCloud...");
 
     widget.load(track.url, {
       ...soundCloudPlayerOptions,
       auto_play: shouldAutoplay,
       callback: () => {
+        if (loadRequestId !== activeLoadRequestId) {
+          return;
+        }
+
         widget.setVolume(Number(volumeInput.value));
         syncCurrentSound(widget);
+
+        if (shouldAutoplay) {
+          widget.play();
+          setPlayerStatus("Preparando reproduccion...");
+        } else {
+          setPlayerStatus("Listo para reproducir");
+        }
 
         if (showAutoplayFallbackToast && shouldAutoplay) {
           scheduleAutoplayFallbackToast();
         }
       },
     });
-
-    if (!shouldAutoplay) {
-      updatePlayButton(false);
-      setPlayerStatus("Listo para reproducir");
-    }
   };
 
   await waitForWidgetReady(widget, SC);
@@ -433,6 +442,7 @@ export async function initSoundCloudPlayer() {
   prevButton.addEventListener("click", () => {
     hasUserInteracted = true;
     clearAutoplayFallbackTimeout();
+    hasPlaybackStarted = true;
     const prevIndex =
       (currentTrackIndex - 1 + soundCloudPlaylist.length) %
       soundCloudPlaylist.length;
@@ -442,6 +452,7 @@ export async function initSoundCloudPlayer() {
   nextButton.addEventListener("click", () => {
     hasUserInteracted = true;
     clearAutoplayFallbackTimeout();
+    hasPlaybackStarted = true;
     const nextIndex = (currentTrackIndex + 1) % soundCloudPlaylist.length;
     loadTrack(nextIndex, { autoplay: true });
   });
