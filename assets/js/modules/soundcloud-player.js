@@ -14,6 +14,7 @@ const DISC_START_ACCELERATION = 220;
 const DISC_STOP_ACCELERATION = 360;
 const AUTOPLAY_TOAST_DELAY_MS = 2200;
 const AUTOPLAY_TOAST_DURATION_MS = 3000;
+const PLAY_RETRY_DELAY_MS = 900;
 
 function getRandomTrackIndex() {
   return Math.floor(Math.random() * soundCloudPlaylist.length);
@@ -233,6 +234,8 @@ export async function initSoundCloudPlayer() {
   let autoplayFallbackTimeoutId = null;
   let hasShownAutoplayToast = false;
   let activeLoadRequestId = 0;
+  let playRetryTimeoutId = null;
+  let isPlaying = false;
   const initialTrackIndex = getRandomTrackIndex();
   const disc = document.querySelector("[data-soundcloud-disc]");
 
@@ -240,6 +243,13 @@ export async function initSoundCloudPlayer() {
     if (autoplayFallbackTimeoutId !== null) {
       window.clearTimeout(autoplayFallbackTimeoutId);
       autoplayFallbackTimeoutId = null;
+    }
+  };
+
+  const clearPlayRetryTimeout = () => {
+    if (playRetryTimeoutId !== null) {
+      window.clearTimeout(playRetryTimeoutId);
+      playRetryTimeoutId = null;
     }
   };
 
@@ -335,6 +345,19 @@ export async function initSoundCloudPlayer() {
     progressIntervalId = window.setInterval(syncPlaybackProgress, PROGRESS_POLL_MS);
   };
 
+  const requestPlayback = ({ retry = false } = {}) => {
+    widget.play();
+
+    if (!retry) {
+      clearPlayRetryTimeout();
+      playRetryTimeoutId = window.setTimeout(() => {
+        if (!isPlaying) {
+          requestPlayback({ retry: true });
+        }
+      }, PLAY_RETRY_DELAY_MS);
+    }
+  };
+
   const loadTrack = async (
     trackIndex,
     { autoplay = false, showAutoplayFallbackToast = false } = {}
@@ -346,6 +369,8 @@ export async function initSoundCloudPlayer() {
     currentTrackIndex = trackIndex;
     currentProgress = 0;
     stopProgressSync();
+    clearPlayRetryTimeout();
+    isPlaying = false;
     setDiscPlaying(false);
     updateTrackUi(track);
     updateTonearmProgress(0, { isResting: true });
@@ -364,8 +389,8 @@ export async function initSoundCloudPlayer() {
         syncCurrentSound(widget);
 
         if (shouldAutoplay) {
-          widget.play();
           setPlayerStatus("Preparando reproduccion...");
+          requestPlayback();
         } else {
           setPlayerStatus("Listo para reproducir");
         }
@@ -388,6 +413,8 @@ export async function initSoundCloudPlayer() {
   });
 
   widget.bind(SC.Widget.Events.PLAY, () => {
+    clearPlayRetryTimeout();
+    isPlaying = true;
     hasPlaybackStarted = true;
     clearAutoplayFallbackTimeout();
     syncCurrentSound(widget);
@@ -399,6 +426,8 @@ export async function initSoundCloudPlayer() {
   });
 
   widget.bind(SC.Widget.Events.PAUSE, () => {
+    clearPlayRetryTimeout();
+    isPlaying = false;
     stopProgressSync();
     updatePlayButton(false);
     setDiscPlaying(false);
@@ -418,6 +447,8 @@ export async function initSoundCloudPlayer() {
   });
 
   widget.bind(SC.Widget.Events.FINISH, () => {
+    clearPlayRetryTimeout();
+    isPlaying = false;
     stopProgressSync();
     currentProgress = 1;
     updateTonearmProgress(1);
@@ -436,7 +467,15 @@ export async function initSoundCloudPlayer() {
   playButton.addEventListener("click", () => {
     hasUserInteracted = true;
     clearAutoplayFallbackTimeout();
-    widget.toggle();
+    clearPlayRetryTimeout();
+
+    if (isPlaying) {
+      widget.pause();
+      return;
+    }
+
+    setPlayerStatus("Preparando reproduccion...");
+    requestPlayback();
   });
 
   prevButton.addEventListener("click", () => {
