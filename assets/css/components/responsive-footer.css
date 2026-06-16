@@ -188,14 +188,14 @@
   }
 
   .footer-column--centered {
-    align-items: flex-start;
-    text-align: left;
+    align-items: center;
+    text-align: center;
   }
 
   .footer-column--centered .footer-link {
-    width: 100%;
+    width: auto;
     min-width: 0;
-    text-align: left;
+    text-align: center;
   }
 
   .footer-dock__slot--player .floating-player.is-docked {
