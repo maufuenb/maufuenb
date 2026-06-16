@@ -6,28 +6,28 @@
     <h3 id="product-projects-title" class="m-0 font-['Orbitron'] text-[clamp(1.6rem,3vw,2.5rem)] leading-[1.08] text-white">Ideas, ecosistemas y productos en evolución</h3>
   </div>
 
-  <div class="reveal relative overflow-visible" data-project-carousel-root>
-    <div class="mb-5 hidden items-center justify-between gap-4 max-[1023px]:flex">
-      <div class="flex items-center gap-2">
+  <div class="reveal project-carousel-shell relative overflow-visible" data-project-carousel-root>
+    <div class="project-carousel-controls mb-5 hidden items-center justify-between gap-4 lg:flex">
+      <div class="project-carousel-controls__group flex items-center gap-2">
         <button
-          class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-lg text-cyan-100 transition-[transform,border-color,color,background-color] duration-200 hover:-translate-x-0.5 hover:border-cyan-300/45 hover:bg-cyan-300/10 hover:text-cyan-300 disabled:cursor-not-allowed disabled:opacity-35"
+          class="project-carousel-control inline-flex h-11 w-11 items-center justify-center rounded-[1rem] border border-white/10 bg-white/5 text-lg text-cyan-100 transition-[transform,border-color,color,background-color] duration-200 hover:-translate-x-0.5 hover:border-cyan-300/45 hover:bg-cyan-300/10 hover:text-cyan-300 disabled:cursor-not-allowed disabled:opacity-35"
           type="button" data-project-prev aria-label="Proyecto anterior">
           ←
         </button>
         <button
-          class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-lg text-cyan-100 transition-[transform,border-color,color,background-color] duration-200 hover:translate-x-0.5 hover:border-cyan-300/45 hover:bg-cyan-300/10 hover:text-cyan-300 disabled:cursor-not-allowed disabled:opacity-35"
+          class="project-carousel-control inline-flex h-11 w-11 items-center justify-center rounded-[1rem] border border-white/10 bg-white/5 text-lg text-cyan-100 transition-[transform,border-color,color,background-color] duration-200 hover:translate-x-0.5 hover:border-cyan-300/45 hover:bg-cyan-300/10 hover:text-cyan-300 disabled:cursor-not-allowed disabled:opacity-35"
           type="button" data-project-next aria-label="Proyecto siguiente">
           →
         </button>
       </div>
     </div>
 
-    <div class="grid w-full grid-cols-1 gap-6 lg:grid-cols-2 xl:grid-cols-3 max-[1023px]:block max-[1023px]:overflow-visible"
+    <div class="project-carousel-grid w-full max-[1023px]:block max-[1023px]:overflow-visible"
       data-project-carousel>
-      <div class="contents max-[1023px]:relative max-[1023px]:block" data-project-track>
-        <div class="contents max-[1023px]:absolute max-[1023px]:inset-0 max-[1023px]:flex max-[1023px]:items-center max-[1023px]:justify-center"
+      <div class="project-carousel-track" data-project-track>
+        <div class="project-carousel-slide"
           data-project-slide>
-          <article class="project-card project-card--media group flex min-h-full w-full max-w-none flex-col p-5 lg:max-w-[22rem]">
+          <article class="project-card project-card--media group flex min-h-full w-full max-w-none flex-col p-5">
             <div class="flex min-h-[4rem] flex-col gap-2.5">
               <p class="m-0 font-['Orbitron'] text-[0.72rem] uppercase tracking-[0.18em] text-[var(--magenta)]">In Development
               </p>
@@ -56,9 +56,9 @@
           </article>
         </div>
 
-        <div class="contents max-[1023px]:absolute max-[1023px]:inset-0 max-[1023px]:flex max-[1023px]:items-center max-[1023px]:justify-center"
+        <div class="project-carousel-slide"
           data-project-slide>
-          <article class="project-card project-card--media group flex min-h-full w-full max-w-none flex-col p-5 lg:max-w-[22rem]">
+          <article class="project-card project-card--media group flex min-h-full w-full max-w-none flex-col p-5">
             <div class="flex min-h-[4rem] flex-col gap-2.5">
               <p class="m-0 font-['Orbitron'] text-[0.72rem] uppercase tracking-[0.18em] text-[var(--magenta)]">In Development
               </p>
@@ -68,7 +68,7 @@
                     class="h-8 w-8 object-contain [filter:saturate(1.2)_contrast(1.1)_brightness(1.08)] transition duration-300 group-hover:scale-[1.03] group-hover:[filter:saturate(1.45)_contrast(1.16)_brightness(1.2)]">
                 </span>
                 <h3 class="m-0 font-['Orbitron'] text-[clamp(0.92rem,1.2vw,1.05rem)] leading-[1.08] text-cyan-300">
-                  Kiveron ADs</h3>
+                  Kiveron ADS</h3>
               </div>
             </div>
             <div class="mt-4 flex flex-1 flex-col gap-[0.9rem]">
@@ -86,9 +86,9 @@
           </article>
         </div>
 
-        <div class="contents max-[1023px]:absolute max-[1023px]:inset-0 max-[1023px]:flex max-[1023px]:items-center max-[1023px]:justify-center"
+        <div class="project-carousel-slide"
           data-project-slide>
-          <article class="project-card project-card--media group flex min-h-full w-full max-w-none flex-col p-5 lg:max-w-[22rem]">
+          <article class="project-card project-card--media group flex min-h-full w-full max-w-none flex-col p-5">
             <div class="flex min-h-[4rem] flex-col gap-2.5">
               <p class="m-0 font-['Orbitron'] text-[0.72rem] uppercase tracking-[0.18em] text-[#ffd166]">Private</p>
               <div class="flex items-center gap-[0.9rem]">

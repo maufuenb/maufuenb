@@ -5,6 +5,129 @@
   transform: translateZ(0);
 }
 
+.stack-carousel-control {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 14px) 100%, 0 100%);
+  border-color: rgba(72, 243, 255, 0.18);
+  background:
+    radial-gradient(circle at top, rgba(72, 243, 255, 0.2), transparent 58%),
+    linear-gradient(180deg, rgba(12, 16, 34, 0.96), rgba(8, 10, 22, 0.92));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 14px 28px rgba(0, 0, 0, 0.24),
+    0 0 0 1px rgba(72, 243, 255, 0.06);
+  text-shadow: 0 0 12px rgba(72, 243, 255, 0.28);
+}
+
+.stack-carousel-control::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  z-index: -1;
+  background:
+    linear-gradient(135deg, rgba(72, 243, 255, 0.12), transparent 42%),
+    linear-gradient(225deg, rgba(255, 72, 199, 0.14), transparent 54%);
+  opacity: 0.95;
+}
+
+.stack-carousel-control::after {
+  content: "";
+  position: absolute;
+  right: 0.62rem;
+  bottom: 0.5rem;
+  width: 0.9rem;
+  height: 0.16rem;
+  transform: skewX(-35deg);
+  background: rgba(72, 243, 255, 0.9);
+  box-shadow: 0 0 12px rgba(72, 243, 255, 0.5);
+  opacity: 0.82;
+}
+
+.stack-carousel-control:hover,
+.stack-carousel-control:focus-visible {
+  border-color: rgba(72, 243, 255, 0.46);
+  background:
+    radial-gradient(circle at top, rgba(72, 243, 255, 0.28), transparent 60%),
+    linear-gradient(180deg, rgba(14, 18, 38, 0.98), rgba(9, 12, 26, 0.96));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 18px 34px rgba(0, 0, 0, 0.28),
+    0 0 20px rgba(72, 243, 255, 0.12);
+}
+
+.stack-carousel-control:focus-visible {
+  outline: none;
+}
+
+.stack-carousel-control:disabled {
+  border-color: rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(180deg, rgba(10, 12, 24, 0.78), rgba(7, 9, 19, 0.74));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 10px 20px rgba(0, 0, 0, 0.16);
+  text-shadow: none;
+}
+
+.stack-carousel-control:disabled::after {
+  opacity: 0.28;
+  box-shadow: none;
+}
+
+@media (min-width: 1024px) {
+  .stack-carousel-shell {
+    padding-inline: 5.75rem;
+  }
+
+  .stack-carousel-controls {
+    position: absolute;
+    inset: 50% 0 auto;
+    z-index: 5;
+    margin: 0;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  .stack-carousel-controls__group {
+    width: 100%;
+  }
+
+  .stack-carousel-control {
+    position: absolute;
+    top: 50%;
+    pointer-events: auto;
+    transform: translateY(-50%);
+    width: 3.35rem;
+    height: 3.35rem;
+    font-size: 1.1rem;
+    backdrop-filter: blur(16px);
+  }
+
+  .stack-carousel-control[data-stack-prev] {
+    left: 1rem;
+  }
+
+  .stack-carousel-control[data-stack-next] {
+    right: 1rem;
+  }
+
+  .stack-carousel-control[data-stack-prev]:hover {
+    transform: translateY(-50%) translateX(-0.3rem);
+  }
+
+  .stack-carousel-control[data-stack-next]:hover {
+    transform: translateY(-50%) translateX(0.3rem);
+  }
+}
+
+@media (max-width: 1023px) {
+  .stack-carousel-controls {
+    display: none;
+  }
+}
+
 .stack-meter-ring {
   width: var(--size, 7rem);
   height: var(--size, 7rem);
@@ -54,4 +177,12 @@
 
 .stack-meter-frameworks {
   --meter-color: #ffd166;
+}
+
+.stack-meter-architecture {
+  --meter-color: #b388ff;
+}
+
+.stack-meter-libraries {
+  --meter-color: #ff7a59;
 }

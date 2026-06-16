@@ -1,4 +1,5 @@
 function initProjectCarousel(root) {
+  const DESKTOP_WIDE_BREAKPOINT = 1440;
   const TABLET_BREAKPOINT = 1023;
   const MOBILE_BREAKPOINT = 767;
   const carousel = root.querySelector("[data-project-carousel]");
@@ -54,32 +55,7 @@ function initProjectCarousel(root) {
     track.style.height = maxHeight ? `${maxHeight}px` : "";
   };
 
-  const resetDesktopLayout = () => {
-    track.style.height = "";
-
-    slides.forEach((slide) => {
-      const article = slide.firstElementChild;
-
-      slide.setAttribute("aria-hidden", "false");
-      slide.style.position = "";
-      slide.style.inset = "";
-      slide.style.display = "";
-      slide.style.alignItems = "";
-      slide.style.justifyContent = "";
-      slide.style.width = "";
-      slide.style.paddingInline = "";
-      slide.style.zIndex = "";
-      slide.style.pointerEvents = "";
-      slide.style.opacity = "";
-      slide.style.transform = "";
-      slide.style.transition = "";
-
-      if (article) {
-        article.dataset.active = "true";
-        article.style.opacity = "";
-      }
-    });
-
+  const resetDotStyles = () => {
     dots.forEach((dot) => {
       dot.style.opacity = "";
       dot.style.transform = "";
@@ -88,22 +64,82 @@ function initProjectCarousel(root) {
     });
   };
 
+  const getDesktopVisibleCount = () => (window.innerWidth >= DESKTOP_WIDE_BREAKPOINT ? 4 : 3);
+
+  const updateDesktopDots = (startIndex, visibleCount) => {
+    const maxStartIndex = Math.max(0, slides.length - visibleCount);
+
+    dots.forEach((dot, dotIndex) => {
+      const isVisible = dotIndex >= startIndex && dotIndex < startIndex + visibleCount;
+      const isEdge = dotIndex === startIndex || dotIndex === Math.min(startIndex + visibleCount - 1, slides.length - 1);
+
+      dot.style.opacity = isVisible ? "1" : "0.35";
+      dot.style.transform = isEdge ? "scale(1.1)" : "scale(1)";
+      dot.style.backgroundColor = isVisible
+        ? "rgba(72, 243, 255, 0.62)"
+        : "rgba(255, 255, 255, 0.08)";
+      dot.style.borderColor = isVisible
+        ? "rgba(72, 243, 255, 0.58)"
+        : "rgba(72, 243, 255, 0.18)";
+    });
+
+    prevButton.disabled = startIndex === 0;
+    nextButton.disabled = startIndex >= maxStartIndex;
+  };
+
+  const updateDesktopCarousel = (requestedIndex) => {
+    const visibleCount = Math.min(getDesktopVisibleCount(), slides.length);
+    const maxStartIndex = Math.max(0, slides.length - visibleCount);
+    const startIndex = Math.min(Math.max(requestedIndex, 0), maxStartIndex);
+
+    activeIndex = startIndex;
+    root.style.setProperty("--project-visible-count", String(visibleCount));
+    root.dataset.projectCompact = "false";
+    track.style.height = "";
+    track.style.transform = `translate3d(calc(-${startIndex} * ((100% - (${visibleCount} - 1) * 1.5rem) / ${visibleCount} + 1.5rem)), 0, 0)`;
+
+    slides.forEach((slide, slideIndex) => {
+      const article = slide.firstElementChild;
+      const isVisible = slideIndex >= startIndex && slideIndex < startIndex + visibleCount;
+
+      slide.setAttribute("aria-hidden", String(!isVisible));
+      slide.style.position = "";
+      slide.style.inset = "";
+      slide.style.display = "";
+      slide.style.alignItems = "";
+      slide.style.justifyContent = "";
+      slide.style.width = "";
+      slide.style.paddingInline = "";
+      slide.style.zIndex = "";
+      slide.style.pointerEvents = "auto";
+      slide.style.opacity = "1";
+      slide.style.transform = "";
+      slide.style.transition = "";
+
+      if (article) {
+        article.dataset.active = String(isVisible);
+        article.style.opacity = "";
+      }
+    });
+
+    updateDesktopDots(startIndex, visibleCount);
+  };
+
   function updateCarousel(index, dragOffset = 0) {
-    activeIndex = Math.min(Math.max(index, 0), slides.length - 1);
     const viewportWidth = window.innerWidth;
     const isCompactViewport = viewportWidth <= TABLET_BREAKPOINT;
     const isMobileViewport = viewportWidth <= MOBILE_BREAKPOINT;
 
-    root.dataset.projectCompact = String(isCompactViewport);
-
     if (!isCompactViewport) {
-      resetDesktopLayout();
-      prevButton.disabled = false;
-      nextButton.disabled = false;
+      updateDesktopCarousel(index);
       return;
     }
 
+    activeIndex = Math.min(Math.max(index, 0), slides.length - 1);
+    root.dataset.projectCompact = "true";
+
     syncTrackHeight(true);
+    track.style.transform = "";
 
     slides.forEach((slide, slideIndex) => {
       const article = slide.firstElementChild;
@@ -263,6 +299,8 @@ function initProjectCarousel(root) {
       controls.style.display = "none";
     }
     dotsContainer.style.display = "none";
+  } else {
+    resetDotStyles();
   }
 
   updateCarousel(0);

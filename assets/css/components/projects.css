@@ -16,6 +16,171 @@
     background 0.28s ease;
 }
 
+.project-carousel-control {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 14px) 100%, 0 100%);
+  border-color: rgba(72, 243, 255, 0.18);
+  background:
+    radial-gradient(circle at top, rgba(72, 243, 255, 0.2), transparent 58%),
+    linear-gradient(180deg, rgba(12, 16, 34, 0.96), rgba(8, 10, 22, 0.92));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 14px 28px rgba(0, 0, 0, 0.24),
+    0 0 0 1px rgba(72, 243, 255, 0.06);
+  text-shadow: 0 0 12px rgba(72, 243, 255, 0.28);
+}
+
+.project-carousel-control::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  z-index: -1;
+  background:
+    linear-gradient(135deg, rgba(72, 243, 255, 0.12), transparent 42%),
+    linear-gradient(225deg, rgba(255, 72, 199, 0.14), transparent 54%);
+  opacity: 0.95;
+}
+
+.project-carousel-control::after {
+  content: "";
+  position: absolute;
+  right: 0.62rem;
+  bottom: 0.5rem;
+  width: 0.9rem;
+  height: 0.16rem;
+  transform: skewX(-35deg);
+  background: rgba(72, 243, 255, 0.9);
+  box-shadow: 0 0 12px rgba(72, 243, 255, 0.5);
+  opacity: 0.82;
+}
+
+.project-carousel-control:hover,
+.project-carousel-control:focus-visible {
+  border-color: rgba(72, 243, 255, 0.46);
+  background:
+    radial-gradient(circle at top, rgba(72, 243, 255, 0.28), transparent 60%),
+    linear-gradient(180deg, rgba(14, 18, 38, 0.98), rgba(9, 12, 26, 0.96));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 18px 34px rgba(0, 0, 0, 0.28),
+    0 0 20px rgba(72, 243, 255, 0.12);
+}
+
+.project-carousel-control:focus-visible {
+  outline: none;
+}
+
+.project-carousel-control:disabled {
+  border-color: rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(180deg, rgba(10, 12, 24, 0.78), rgba(7, 9, 19, 0.74));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 10px 20px rgba(0, 0, 0, 0.16);
+  text-shadow: none;
+}
+
+.project-carousel-control:disabled::after {
+  opacity: 0.28;
+  box-shadow: none;
+}
+
+@media (min-width: 1024px) {
+  .project-carousel-shell {
+    padding-inline: 5.75rem;
+  }
+
+  .project-carousel-controls {
+    position: absolute;
+    inset: 50% 0 auto;
+    z-index: 5;
+    margin: 0;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  .project-carousel-controls__group {
+    width: 100%;
+  }
+
+  .project-carousel-control {
+    position: absolute;
+    top: 50%;
+    pointer-events: auto;
+    transform: translateY(-50%);
+    width: 3.35rem;
+    height: 3.35rem;
+    font-size: 1.1rem;
+    backdrop-filter: blur(16px);
+  }
+
+  .project-carousel-control[data-project-prev] {
+    left: 1rem;
+  }
+
+  .project-carousel-control[data-project-next] {
+    right: 1rem;
+  }
+
+  .project-carousel-control[data-project-prev]:hover {
+    transform: translateY(-50%) translateX(-0.3rem);
+  }
+
+  .project-carousel-control[data-project-next]:hover {
+    transform: translateY(-50%) translateX(0.3rem);
+  }
+
+  .project-carousel-grid[data-project-carousel] {
+    overflow-x: hidden;
+    overflow-y: visible;
+    padding-top: 0.5rem;
+  }
+
+  .project-carousel-track {
+    display: flex;
+    gap: 1.5rem;
+    transition: transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+
+  .project-carousel-slide {
+    position: static;
+    inset: auto;
+    display: block;
+    flex: 0 0 calc((100% - (var(--project-visible-count, 3) - 1) * 1.5rem) / var(--project-visible-count, 3));
+    width: calc((100% - (var(--project-visible-count, 3) - 1) * 1.5rem) / var(--project-visible-count, 3));
+    padding-inline: 0;
+    opacity: 1;
+    transform: none;
+  }
+
+  .project-carousel-slide > .project-card {
+    max-width: none;
+    width: 100%;
+  }
+}
+
+@media (max-width: 1023px) {
+  .project-carousel-controls {
+    display: none;
+  }
+
+  .project-carousel-track {
+    position: relative;
+    display: block;
+  }
+
+  .project-carousel-slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
 .project-card::before {
   content: "";
   position: absolute;
