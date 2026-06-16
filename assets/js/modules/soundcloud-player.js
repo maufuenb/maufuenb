@@ -13,8 +13,10 @@ const DISC_TARGET_SPEED = 200;
 const DISC_START_ACCELERATION = 220;
 const DISC_STOP_ACCELERATION = 360;
 const AUTOPLAY_TOAST_DELAY_MS = 2200;
-const AUTOPLAY_TOAST_DURATION_MS = 3000;
+const AUTOPLAY_TOAST_DURATION_MS = 9000;
 const PLAY_RETRY_DELAY_MS = 900;
+const WIDGET_READY_TIMEOUT_MS = 7000;
+const MOBILE_BREAKPOINT = 1023;
 
 function getRandomTrackIndex() {
   return Math.floor(Math.random() * soundCloudPlaylist.length);
@@ -62,8 +64,15 @@ function loadSoundCloudScript() {
 }
 
 function waitForWidgetReady(widget, SC) {
-  return new Promise((resolve) => {
-    widget.bind(SC.Widget.Events.READY, resolve);
+  return new Promise((resolve, reject) => {
+    const timeoutId = window.setTimeout(() => {
+      reject(new Error("SoundCloud tardo demasiado en responder."));
+    }, WIDGET_READY_TIMEOUT_MS);
+
+    widget.bind(SC.Widget.Events.READY, () => {
+      window.clearTimeout(timeoutId);
+      resolve();
+    });
   });
 }
 
@@ -174,7 +183,48 @@ function setPlayerStatus(message) {
   statusTarget.textContent = message;
 }
 
-function showAppToast(message, duration = AUTOPLAY_TOAST_DURATION_MS) {
+function hideAppToast(toast) {
+  if (!toast) {
+    return;
+  }
+
+  if (toast.hideTimeoutId) {
+    window.clearTimeout(toast.hideTimeoutId);
+    toast.hideTimeoutId = null;
+  }
+
+  toast.classList.remove("is-visible");
+
+  window.setTimeout(() => {
+    if (!toast.classList.contains("is-visible")) {
+      toast.hidden = true;
+      toast.innerHTML = "";
+    }
+  }, 280);
+}
+
+function buildAutoplayToastContent() {
+  if (window.innerWidth <= MOBILE_BREAKPOINT) {
+    return {
+      title: "La musica tambien acompana este recorrido",
+      message:
+        "Si quieres escuchar la musica que me inspira cuando creo, abre el menu y pulsa Reproductor para activarla.",
+      actionLabel: "Ir al reproductor",
+      actionTarget: "#reproductor-footer",
+    };
+  }
+
+  return {
+    title: "La musica tambien acompana este recorrido",
+    message:
+      "Si quieres escuchar la musica que me inspira cuando creo, activa el reproductor desde el disco flotante que ves en pantalla.",
+  };
+}
+
+function showAppToast(
+  { title, message, actionLabel = "", actionTarget = "" },
+  duration = AUTOPLAY_TOAST_DURATION_MS
+) {
   const toast = document.querySelector("[data-app-toast]");
 
   if (!toast) {
@@ -185,18 +235,54 @@ function showAppToast(message, duration = AUTOPLAY_TOAST_DURATION_MS) {
     window.clearTimeout(toast.hideTimeoutId);
   }
 
+  toast.classList.add("app-toast--warning");
   toast.hidden = false;
-  toast.textContent = message;
+  toast.innerHTML = `
+    <div class="app-toast__header">
+      <div class="app-toast__eyebrow">Aviso</div>
+      <button class="app-toast__close" type="button" aria-label="Cerrar aviso" data-app-toast-close>
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <p class="app-toast__title">${title}</p>
+    <p class="app-toast__message">${message}</p>
+    ${
+      actionLabel && actionTarget
+        ? `<a class="app-toast__action" href="${actionTarget}" data-app-toast-action>${actionLabel}</a>`
+        : ""
+    }
+  `;
+
+  const closeButton = toast.querySelector("[data-app-toast-close]");
+  const actionButton = toast.querySelector("[data-app-toast-action]");
+
+  closeButton?.addEventListener(
+    "click",
+    () => {
+      hideAppToast(toast);
+    },
+    { once: true }
+  );
+
+  actionButton?.addEventListener(
+    "click",
+    () => {
+      hideAppToast(toast);
+    },
+    { once: true }
+  );
+
   window.requestAnimationFrame(() => {
     toast.classList.add("is-visible");
   });
 
+  if (!Number.isFinite(duration) || duration <= 0) {
+    toast.hideTimeoutId = null;
+    return;
+  }
+
   toast.hideTimeoutId = window.setTimeout(() => {
-    toast.classList.remove("is-visible");
-    window.setTimeout(() => {
-      toast.hidden = true;
-      toast.textContent = "";
-    }, 280);
+    hideAppToast(toast);
   }, duration);
 }
 
@@ -218,289 +304,304 @@ export async function initSoundCloudPlayer() {
     return;
   }
 
-  const SC = await loadSoundCloudScript();
-  const widget = SC.Widget(iframe);
+  const iframeSrc = iframe.dataset.soundcloudSrc;
 
-  let currentTrackIndex = 0;
-  let currentProgress = 0;
-  let progressIntervalId = null;
-  let discRotation = 0;
-  let discSpeed = 0;
-  let discTargetSpeed = 0;
-  let discAnimationFrameId = null;
-  let discLastFrameTime = null;
-  let hasUserInteracted = false;
-  let hasPlaybackStarted = false;
-  let autoplayFallbackTimeoutId = null;
-  let hasShownAutoplayToast = false;
-  let activeLoadRequestId = 0;
-  let playRetryTimeoutId = null;
-  let isPlaying = false;
-  const initialTrackIndex = getRandomTrackIndex();
-  const disc = document.querySelector("[data-soundcloud-disc]");
+  if (iframeSrc && iframe.src !== iframeSrc) {
+    iframe.src = iframeSrc;
+  }
 
-  const clearAutoplayFallbackTimeout = () => {
-    if (autoplayFallbackTimeoutId !== null) {
-      window.clearTimeout(autoplayFallbackTimeoutId);
-      autoplayFallbackTimeoutId = null;
-    }
-  };
+  try {
+    const SC = await loadSoundCloudScript();
+    const widget = SC.Widget(iframe);
 
-  const clearPlayRetryTimeout = () => {
-    if (playRetryTimeoutId !== null) {
-      window.clearTimeout(playRetryTimeoutId);
-      playRetryTimeoutId = null;
-    }
-  };
+    let currentTrackIndex = 0;
+    let currentProgress = 0;
+    let progressIntervalId = null;
+    let discRotation = 0;
+    let discSpeed = 0;
+    let discTargetSpeed = 0;
+    let discAnimationFrameId = null;
+    let discLastFrameTime = null;
+    let hasUserInteracted = false;
+    let hasPlaybackStarted = false;
+    let autoplayFallbackTimeoutId = null;
+    let hasShownAutoplayToast = false;
+    let activeLoadRequestId = 0;
+    let playRetryTimeoutId = null;
+    let isPlaying = false;
+    const initialTrackIndex = getRandomTrackIndex();
+    const disc = document.querySelector("[data-soundcloud-disc]");
 
-  const scheduleAutoplayFallbackToast = () => {
-    clearAutoplayFallbackTimeout();
+    const clearAutoplayFallbackTimeout = () => {
+      if (autoplayFallbackTimeoutId !== null) {
+        window.clearTimeout(autoplayFallbackTimeoutId);
+        autoplayFallbackTimeoutId = null;
+      }
+    };
 
-    autoplayFallbackTimeoutId = window.setTimeout(() => {
-      if (hasPlaybackStarted || hasUserInteracted || hasShownAutoplayToast) {
+    const clearPlayRetryTimeout = () => {
+      if (playRetryTimeoutId !== null) {
+        window.clearTimeout(playRetryTimeoutId);
+        playRetryTimeoutId = null;
+      }
+    };
+
+    const scheduleAutoplayFallbackToast = () => {
+      clearAutoplayFallbackTimeout();
+
+      autoplayFallbackTimeoutId = window.setTimeout(() => {
+        if (hasPlaybackStarted || hasUserInteracted || hasShownAutoplayToast) {
+          return;
+        }
+
+        hasShownAutoplayToast = true;
+        showAppToast(buildAutoplayToastContent());
+      }, AUTOPLAY_TOAST_DELAY_MS);
+    };
+
+    const stopDiscAnimation = () => {
+      if (discAnimationFrameId !== null) {
+        window.cancelAnimationFrame(discAnimationFrameId);
+        discAnimationFrameId = null;
+      }
+      discLastFrameTime = null;
+    };
+
+    const animateDisc = (timestamp) => {
+      if (discLastFrameTime === null) {
+        discLastFrameTime = timestamp;
+      }
+
+      const deltaSeconds = (timestamp - discLastFrameTime) / 1000;
+      discLastFrameTime = timestamp;
+
+      const accelerating = discTargetSpeed > discSpeed;
+      const acceleration = accelerating
+        ? DISC_START_ACCELERATION
+        : DISC_STOP_ACCELERATION;
+      const speedDelta = acceleration * deltaSeconds;
+
+      if (accelerating) {
+        discSpeed = Math.min(discSpeed + speedDelta, discTargetSpeed);
+      } else {
+        discSpeed = Math.max(discSpeed - speedDelta, discTargetSpeed);
+      }
+
+      discRotation = (discRotation + discSpeed * deltaSeconds) % 360;
+      setDiscRotation(discRotation);
+
+      if (disc) {
+        disc.classList.toggle("music-disc--active", discSpeed > 1);
+      }
+
+      if (discSpeed === 0 && discTargetSpeed === 0) {
+        stopDiscAnimation();
         return;
       }
 
-      hasShownAutoplayToast = true;
-      showAppToast(
-        "Para una experiencia mas inmersiva en la web, activa el reproductor y deja que acompane el recorrido."
-      );
-    }, AUTOPLAY_TOAST_DELAY_MS);
-  };
-
-  const stopDiscAnimation = () => {
-    if (discAnimationFrameId !== null) {
-      window.cancelAnimationFrame(discAnimationFrameId);
-      discAnimationFrameId = null;
-    }
-    discLastFrameTime = null;
-  };
-
-  const animateDisc = (timestamp) => {
-    if (discLastFrameTime === null) {
-      discLastFrameTime = timestamp;
-    }
-
-    const deltaSeconds = (timestamp - discLastFrameTime) / 1000;
-    discLastFrameTime = timestamp;
-
-    const accelerating = discTargetSpeed > discSpeed;
-    const acceleration = accelerating
-      ? DISC_START_ACCELERATION
-      : DISC_STOP_ACCELERATION;
-    const speedDelta = acceleration * deltaSeconds;
-
-    if (accelerating) {
-      discSpeed = Math.min(discSpeed + speedDelta, discTargetSpeed);
-    } else {
-      discSpeed = Math.max(discSpeed - speedDelta, discTargetSpeed);
-    }
-
-    discRotation = (discRotation + discSpeed * deltaSeconds) % 360;
-    setDiscRotation(discRotation);
-
-    if (disc) {
-      disc.classList.toggle("music-disc--active", discSpeed > 1);
-    }
-
-    if (discSpeed === 0 && discTargetSpeed === 0) {
-      stopDiscAnimation();
-      return;
-    }
-
-    discAnimationFrameId = window.requestAnimationFrame(animateDisc);
-  };
-
-  const setDiscPlaying = (isPlaying) => {
-    discTargetSpeed = isPlaying ? DISC_TARGET_SPEED : 0;
-
-    if (discAnimationFrameId === null) {
       discAnimationFrameId = window.requestAnimationFrame(animateDisc);
-    }
-  };
+    };
 
-  const stopProgressSync = () => {
-    if (progressIntervalId !== null) {
-      window.clearInterval(progressIntervalId);
-      progressIntervalId = null;
-    }
-  };
+    const setDiscPlaying = (isPlaying) => {
+      discTargetSpeed = isPlaying ? DISC_TARGET_SPEED : 0;
 
-  const syncPlaybackProgress = () => {
-    widget.getDuration((duration) => {
+      if (discAnimationFrameId === null) {
+        discAnimationFrameId = window.requestAnimationFrame(animateDisc);
+      }
+    };
+
+    const stopProgressSync = () => {
+      if (progressIntervalId !== null) {
+        window.clearInterval(progressIntervalId);
+        progressIntervalId = null;
+      }
+    };
+
+    const syncPlaybackProgress = () => {
+      widget.getDuration((duration) => {
+        if (!duration) {
+          return;
+        }
+
+        widget.getPosition((position) => {
+          currentProgress = clamp(position / duration, 0, 1);
+          updateTonearmProgress(currentProgress);
+        });
+      });
+    };
+
+    const startProgressSync = () => {
+      stopProgressSync();
+      syncPlaybackProgress();
+      progressIntervalId = window.setInterval(
+        syncPlaybackProgress,
+        PROGRESS_POLL_MS
+      );
+    };
+
+    const requestPlayback = ({ retry = false } = {}) => {
+      widget.play();
+
+      if (!retry) {
+        clearPlayRetryTimeout();
+        playRetryTimeoutId = window.setTimeout(() => {
+          if (!isPlaying) {
+            requestPlayback({ retry: true });
+          }
+        }, PLAY_RETRY_DELAY_MS);
+      }
+    };
+
+    const loadTrack = async (
+      trackIndex,
+      { autoplay = false, showAutoplayFallbackToast = false } = {}
+    ) => {
+      const loadRequestId = ++activeLoadRequestId;
+      const track = soundCloudPlaylist[trackIndex];
+      const shouldAutoplay = autoplay;
+
+      currentTrackIndex = trackIndex;
+      currentProgress = 0;
+      stopProgressSync();
+      clearPlayRetryTimeout();
+      isPlaying = false;
+      setDiscPlaying(false);
+      updateTrackUi(track);
+      updateTonearmProgress(0, { isResting: true });
+      updatePlayButton(false);
+      setPlayerStatus("Cargando desde SoundCloud...");
+
+      widget.load(track.url, {
+        ...soundCloudPlayerOptions,
+        auto_play: shouldAutoplay,
+        callback: () => {
+          if (loadRequestId !== activeLoadRequestId) {
+            return;
+          }
+
+          widget.setVolume(Number(volumeInput.value));
+          syncCurrentSound(widget);
+
+          if (shouldAutoplay) {
+            setPlayerStatus("Preparando reproduccion...");
+            requestPlayback();
+          } else {
+            setPlayerStatus("Listo para reproducir");
+          }
+
+          if (showAutoplayFallbackToast && shouldAutoplay) {
+            scheduleAutoplayFallbackToast();
+          }
+        },
+      });
+    };
+
+    await waitForWidgetReady(widget, SC);
+    setTonearmAngle(TONEARM_REST_ANGLE);
+    setDiscRotation(0);
+    updatePlayButton(false);
+    setPlayerStatus("Cargando track aleatorio...");
+    await loadTrack(initialTrackIndex, {
+      autoplay: true,
+      showAutoplayFallbackToast: true,
+    });
+
+    widget.bind(SC.Widget.Events.PLAY, () => {
+      clearPlayRetryTimeout();
+      isPlaying = true;
+      hasPlaybackStarted = true;
+      clearAutoplayFallbackTimeout();
+      syncCurrentSound(widget);
+      updatePlayButton(true);
+      updateTonearmProgress(currentProgress);
+      setDiscPlaying(true);
+      startProgressSync();
+      setPlayerStatus("Reproduciendo en SoundCloud");
+    });
+
+    widget.bind(SC.Widget.Events.PAUSE, () => {
+      clearPlayRetryTimeout();
+      isPlaying = false;
+      stopProgressSync();
+      updatePlayButton(false);
+      setDiscPlaying(false);
+      setPlayerStatus("En pausa");
+    });
+
+    widget.bind(SC.Widget.Events.PLAY_PROGRESS, (event) => {
+      const duration = event?.duration ?? 0;
+      const currentPosition = event?.currentPosition ?? 0;
+
       if (!duration) {
         return;
       }
 
-      widget.getPosition((position) => {
-        currentProgress = clamp(position / duration, 0, 1);
-        updateTonearmProgress(currentProgress);
-      });
+      currentProgress = clamp(currentPosition / duration, 0, 1);
+      updateTonearmProgress(currentProgress);
     });
-  };
 
-  const startProgressSync = () => {
-    stopProgressSync();
-    syncPlaybackProgress();
-    progressIntervalId = window.setInterval(syncPlaybackProgress, PROGRESS_POLL_MS);
-  };
-
-  const requestPlayback = ({ retry = false } = {}) => {
-    widget.play();
-
-    if (!retry) {
+    widget.bind(SC.Widget.Events.FINISH, () => {
       clearPlayRetryTimeout();
-      playRetryTimeoutId = window.setTimeout(() => {
-        if (!isPlaying) {
-          requestPlayback({ retry: true });
-        }
-      }, PLAY_RETRY_DELAY_MS);
-    }
-  };
+      isPlaying = false;
+      stopProgressSync();
+      currentProgress = 1;
+      updateTonearmProgress(1);
+      setDiscPlaying(false);
+      const nextIndex = (currentTrackIndex + 1) % soundCloudPlaylist.length;
+      const shouldAutoplay = soundCloudPlaylist.length > 1;
 
-  const loadTrack = async (
-    trackIndex,
-    { autoplay = false, showAutoplayFallbackToast = false } = {}
-  ) => {
-    const loadRequestId = ++activeLoadRequestId;
-    const track = soundCloudPlaylist[trackIndex];
-    const shouldAutoplay = autoplay;
+      loadTrack(nextIndex, { autoplay: shouldAutoplay });
 
-    currentTrackIndex = trackIndex;
-    currentProgress = 0;
-    stopProgressSync();
-    clearPlayRetryTimeout();
-    isPlaying = false;
-    setDiscPlaying(false);
-    updateTrackUi(track);
-    updateTonearmProgress(0, { isResting: true });
-    updatePlayButton(false);
-    setPlayerStatus("Cargando desde SoundCloud...");
-
-    widget.load(track.url, {
-      ...soundCloudPlayerOptions,
-      auto_play: shouldAutoplay,
-      callback: () => {
-        if (loadRequestId !== activeLoadRequestId) {
-          return;
-        }
-
-        widget.setVolume(Number(volumeInput.value));
-        syncCurrentSound(widget);
-
-        if (shouldAutoplay) {
-          setPlayerStatus("Preparando reproduccion...");
-          requestPlayback();
-        } else {
-          setPlayerStatus("Listo para reproducir");
-        }
-
-        if (showAutoplayFallbackToast && shouldAutoplay) {
-          scheduleAutoplayFallbackToast();
-        }
-      },
+      if (!shouldAutoplay) {
+        updatePlayButton(false);
+        setPlayerStatus("Listo para volver a sonar");
+      }
     });
-  };
 
-  await waitForWidgetReady(widget, SC);
-  setTonearmAngle(TONEARM_REST_ANGLE);
-  setDiscRotation(0);
-  updatePlayButton(false);
-  setPlayerStatus("Cargando track aleatorio...");
-  await loadTrack(initialTrackIndex, {
-    autoplay: true,
-    showAutoplayFallbackToast: true,
-  });
+    playButton.addEventListener("click", () => {
+      hasUserInteracted = true;
+      clearAutoplayFallbackTimeout();
+      clearPlayRetryTimeout();
 
-  widget.bind(SC.Widget.Events.PLAY, () => {
-    clearPlayRetryTimeout();
-    isPlaying = true;
-    hasPlaybackStarted = true;
-    clearAutoplayFallbackTimeout();
-    syncCurrentSound(widget);
-    updatePlayButton(true);
-    updateTonearmProgress(currentProgress);
-    setDiscPlaying(true);
-    startProgressSync();
-    setPlayerStatus("Reproduciendo en SoundCloud");
-  });
+      if (isPlaying) {
+        widget.pause();
+        return;
+      }
 
-  widget.bind(SC.Widget.Events.PAUSE, () => {
-    clearPlayRetryTimeout();
-    isPlaying = false;
-    stopProgressSync();
+      setPlayerStatus("Preparando reproduccion...");
+      requestPlayback();
+    });
+
+    prevButton.addEventListener("click", () => {
+      hasUserInteracted = true;
+      clearAutoplayFallbackTimeout();
+      hasPlaybackStarted = true;
+      const prevIndex =
+        (currentTrackIndex - 1 + soundCloudPlaylist.length) %
+        soundCloudPlaylist.length;
+      loadTrack(prevIndex, { autoplay: true });
+    });
+
+    nextButton.addEventListener("click", () => {
+      hasUserInteracted = true;
+      clearAutoplayFallbackTimeout();
+      hasPlaybackStarted = true;
+      const nextIndex = (currentTrackIndex + 1) % soundCloudPlaylist.length;
+      loadTrack(nextIndex, { autoplay: true });
+    });
+
+    volumeInput.addEventListener("input", () => {
+      hasUserInteracted = true;
+      clearAutoplayFallbackTimeout();
+      widget.setVolume(Number(volumeInput.value));
+    });
+
+    setPlayerStatus("Selecciona play para comenzar");
+  } catch (error) {
+    console.error("No se pudo inicializar el reproductor de SoundCloud:", error);
     updatePlayButton(false);
-    setDiscPlaying(false);
-    setPlayerStatus("En pausa");
-  });
-
-  widget.bind(SC.Widget.Events.PLAY_PROGRESS, (event) => {
-    const duration = event?.duration ?? 0;
-    const currentPosition = event?.currentPosition ?? 0;
-
-    if (!duration) {
-      return;
-    }
-
-    currentProgress = clamp(currentPosition / duration, 0, 1);
-    updateTonearmProgress(currentProgress);
-  });
-
-  widget.bind(SC.Widget.Events.FINISH, () => {
-    clearPlayRetryTimeout();
-    isPlaying = false;
-    stopProgressSync();
-    currentProgress = 1;
-    updateTonearmProgress(1);
-    setDiscPlaying(false);
-    const nextIndex = (currentTrackIndex + 1) % soundCloudPlaylist.length;
-    const shouldAutoplay = soundCloudPlaylist.length > 1;
-
-    loadTrack(nextIndex, { autoplay: shouldAutoplay });
-
-    if (!shouldAutoplay) {
-      updatePlayButton(false);
-      setPlayerStatus("Listo para volver a sonar");
-    }
-  });
-
-  playButton.addEventListener("click", () => {
-    hasUserInteracted = true;
-    clearAutoplayFallbackTimeout();
-    clearPlayRetryTimeout();
-
-    if (isPlaying) {
-      widget.pause();
-      return;
-    }
-
-    setPlayerStatus("Preparando reproduccion...");
-    requestPlayback();
-  });
-
-  prevButton.addEventListener("click", () => {
-    hasUserInteracted = true;
-    clearAutoplayFallbackTimeout();
-    hasPlaybackStarted = true;
-    const prevIndex =
-      (currentTrackIndex - 1 + soundCloudPlaylist.length) %
-      soundCloudPlaylist.length;
-    loadTrack(prevIndex, { autoplay: true });
-  });
-
-  nextButton.addEventListener("click", () => {
-    hasUserInteracted = true;
-    clearAutoplayFallbackTimeout();
-    hasPlaybackStarted = true;
-    const nextIndex = (currentTrackIndex + 1) % soundCloudPlaylist.length;
-    loadTrack(nextIndex, { autoplay: true });
-  });
-
-  volumeInput.addEventListener("input", () => {
-    hasUserInteracted = true;
-    clearAutoplayFallbackTimeout();
-    widget.setVolume(Number(volumeInput.value));
-  });
-
-  setPlayerStatus("Selecciona play para comenzar");
+    setTonearmAngle(TONEARM_REST_ANGLE);
+    setDiscRotation(0);
+    setPlayerStatus("Reproductor no disponible en este momento");
+  }
 }

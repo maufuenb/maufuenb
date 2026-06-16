@@ -25,7 +25,6 @@ async function initPage() {
     initSmokeBackground();
     await loadComponents();
     await initGitHubProfile();
-    await initSoundCloudPlayer();
     initHeaderNav();
     initInternalNavigation();
     initContactModal();
@@ -33,6 +32,7 @@ async function initPage() {
     initRevealAnimations();
     initProjectCardEffects();
     initStackInteractions();
+    initSoundCloudPlayer();
   } catch (error) {
     console.error("Error al inicializar la página:", error);
   }
