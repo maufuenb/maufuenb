@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Icono de Memorice Neon Grid">
+  <defs>
+    <linearGradient id="memorice-bg" x1="10" y1="8" x2="54" y2="56" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#48f3ff" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#ff48c7" stop-opacity="0.26"/>
+    </linearGradient>
+    <linearGradient id="memorice-stroke" x1="16" y1="14" x2="48" y2="50" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8ef7ff"/>
+      <stop offset="1" stop-color="#ff7ce0"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="5.5" y="5.5" width="53" height="53" rx="16" fill="#090612"/>
+  <rect x="5.5" y="5.5" width="53" height="53" rx="16" fill="url(#memorice-bg)"/>
+  <rect x="5.5" y="5.5" width="53" height="53" rx="16" fill="none" stroke="#48f3ff" stroke-opacity="0.24"/>
+  <rect x="7.5" y="7.5" width="49" height="49" rx="14" fill="none" stroke="#ffffff" stroke-opacity="0.05"/>
+
+  <g fill="none" stroke="url(#memorice-stroke)" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="16" y="16" width="14" height="14" rx="4" stroke-width="2.5"/>
+    <rect x="34" y="16" width="14" height="14" rx="4" stroke-width="2.5"/>
+    <rect x="16" y="34" width="14" height="14" rx="4" stroke-width="2.5"/>
+    <path d="M34 39.5h14M41 32.5v14" stroke-width="3"/>
+  </g>
+
+  <circle cx="23" cy="23" r="2.2" fill="#8eff83"/>
+  <circle cx="41" cy="23" r="2.2" fill="#48f3ff"/>
+  <circle cx="23" cy="41" r="2.2" fill="#ff48c7"/>
+  <circle cx="41" cy="39.5" r="2.2" fill="#ffd36d"/>
+</svg>
