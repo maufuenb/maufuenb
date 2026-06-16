@@ -10,3 +10,14 @@
     overflow-wrap: anywhere;
   }
 }
+
+@media (max-width: 767px) {
+  .glitch-text {
+    filter: none;
+  }
+
+  .layers::before,
+  .layers::after {
+    opacity: 0.42;
+  }
+}

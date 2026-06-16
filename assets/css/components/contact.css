@@ -21,6 +21,10 @@
     linear-gradient(180deg, rgba(16, 12, 29, 0.88), rgba(9, 7, 20, 0.98));
 }
 
+.contact-card__actions > .button {
+  flex: 1 1 100%;
+}
+
 .contact-tile {
   position: relative;
   display: flex;
