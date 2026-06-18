@@ -32,26 +32,32 @@
     id="primary-navigation"
     class="nav-menu mt-2 flex flex-wrap items-center justify-center gap-3 text-[0.98rem] tracking-[0.04em] text-[var(--muted)] lg:mt-0 lg:gap-[1.15rem]"
     data-nav-menu>
-    <a class="transition-colors duration-200 hover:text-cyan-300 focus-visible:text-cyan-300" href="#perfil">Perfil</a>
-    <a class="transition-colors duration-200 hover:text-cyan-300 focus-visible:text-cyan-300" href="#stack">Stack</a>
+    <a class="nav-link transition-colors duration-200" href="#perfil" data-nav-link>Perfil</a>
+    <a class="nav-link transition-colors duration-200" href="#stack" data-nav-link>Stack</a>
     <div class="nav-dropdown group relative flex items-center" data-nav-dropdown>
       <button
-        class="nav-dropdown__trigger inline-flex items-center gap-2 bg-transparent p-0 transition-colors duration-200 hover:text-cyan-300 focus-visible:text-cyan-300"
+        class="nav-dropdown__trigger nav-link inline-flex items-center gap-2 bg-transparent p-0 transition-colors duration-200"
         type="button" aria-haspopup="true" aria-expanded="false" data-nav-dropdown-trigger>
         Proyectos
         <span class="nav-dropdown__caret" aria-hidden="true"></span>
       </button>
 
       <div class="nav-dropdown__panel" data-nav-dropdown-panel>
-        <a class="nav-dropdown__link relative flex items-center justify-between gap-[0.85rem] rounded-[0.8rem] border border-white/6 bg-[linear-gradient(135deg,rgba(72,243,255,0.08),rgba(255,72,199,0.08))] px-[0.85rem] py-[0.72rem] font-['Orbitron'] text-[0.68rem] uppercase tracking-[0.12em] text-[var(--text)] transition-[color,border-color,background-color,transform,box-shadow] duration-200" href="#proyectos-publicos">Públicos</a>
-        <a class="nav-dropdown__link relative flex items-center justify-between gap-[0.85rem] rounded-[0.8rem] border border-white/6 bg-[linear-gradient(135deg,rgba(72,243,255,0.08),rgba(255,72,199,0.08))] px-[0.85rem] py-[0.72rem] font-['Orbitron'] text-[0.68rem] uppercase tracking-[0.12em] text-[var(--text)] transition-[color,border-color,background-color,transform,box-shadow] duration-200" href="#productos-propios">Propios</a>
+        <a class="nav-dropdown__link relative flex items-center justify-between gap-[0.85rem] rounded-[0.8rem] border border-white/6 bg-[linear-gradient(135deg,rgba(72,243,255,0.08),rgba(255,72,199,0.08))] px-[0.85rem] py-[0.72rem] font-['Orbitron'] text-[0.68rem] uppercase tracking-[0.12em] text-[var(--text)] transition-[color,border-color,background-color,transform,box-shadow] duration-200" href="#proyectos-publicos" data-nav-link>Públicos</a>
+        <a class="nav-dropdown__link relative flex items-center justify-between gap-[0.85rem] rounded-[0.8rem] border border-white/6 bg-[linear-gradient(135deg,rgba(72,243,255,0.08),rgba(255,72,199,0.08))] px-[0.85rem] py-[0.72rem] font-['Orbitron'] text-[0.68rem] uppercase tracking-[0.12em] text-[var(--text)] transition-[color,border-color,background-color,transform,box-shadow] duration-200" href="#productos-propios" data-nav-link>Propios</a>
       </div>
     </div>
-    <a class="transition-colors duration-200 hover:text-cyan-300 focus-visible:text-cyan-300"
+    <a class="nav-link transition-colors duration-200"
+      data-nav-link
       href="#beyond-code">Más allá</a>
-    <a class="transition-colors duration-200 hover:text-cyan-300 focus-visible:text-cyan-300"
+    <a class="nav-link transition-colors duration-200"
+      data-nav-link
+      href="#feedback">Feedback</a>
+    <a class="nav-link transition-colors duration-200"
+      data-nav-link
       href="#contacto">Contacto</a>
-    <a class="transition-colors duration-200 hover:text-cyan-300 focus-visible:text-cyan-300 lg:hidden"
+    <a class="nav-link transition-colors duration-200 lg:hidden"
+      data-nav-link
       href="#reproductor-footer">Reproductor</a>
   </nav>
 </header>

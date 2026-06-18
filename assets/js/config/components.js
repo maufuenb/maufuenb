@@ -7,5 +7,6 @@ export const componentPaths = {
   "projects-public": "./components/pages/projects-public.html",
   "projects-products": "./components/pages/projects-products.html",
   beyond: "./components/pages/beyond.html",
+  feedback: "./components/pages/feedback.html",
   contact: "./components/pages/contact.html",
 };

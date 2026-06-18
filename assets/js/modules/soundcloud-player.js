@@ -66,7 +66,7 @@ function loadSoundCloudScript() {
 function waitForWidgetReady(widget, SC) {
   return new Promise((resolve, reject) => {
     const timeoutId = window.setTimeout(() => {
-      reject(new Error("SoundCloud tardo demasiado en responder."));
+      reject(new Error("SoundCloud tardó demasiado en responder."));
     }, WIDGET_READY_TIMEOUT_MS);
 
     widget.bind(SC.Widget.Events.READY, () => {
@@ -166,7 +166,7 @@ function updatePlayButton(isPlaying) {
   playButton.dataset.state = isPlaying ? "playing" : "paused";
   playButton.setAttribute(
     "aria-label",
-    isPlaying ? "Pausar reproduccion" : "Reproducir"
+    isPlaying ? "Pausar reproducción" : "Reproducir"
   );
   playButton.innerHTML = isPlaying
     ? '<span aria-hidden="true">❚❚</span>'
@@ -206,18 +206,36 @@ function hideAppToast(toast) {
 function buildAutoplayToastContent() {
   if (window.innerWidth <= MOBILE_BREAKPOINT) {
     return {
-      title: "La musica tambien acompana este recorrido",
+      title: "La música también acompaña este recorrido",
       message:
-        "Si quieres escuchar la musica que me inspira cuando creo, abre el menu y pulsa Reproductor para activarla.",
+        "Si quieres escuchar la música que me inspira cuando creo, abre el menú y pulsa Reproductor para activarla.",
       actionLabel: "Ir al reproductor",
       actionTarget: "#reproductor-footer",
     };
   }
 
   return {
-    title: "La musica tambien acompana este recorrido",
+    title: "La música también acompaña este recorrido",
     message:
-      "Si quieres escuchar la musica que me inspira cuando creo, activa el reproductor desde el disco flotante que ves en pantalla.",
+      "Si quieres escuchar la música que me inspira cuando creo, activa el reproductor desde el disco flotante que ves en pantalla.",
+  };
+}
+
+function buildPlaybackUnavailableToastContent() {
+  if (window.innerWidth <= MOBILE_BREAKPOINT) {
+    return {
+      title: "La música no pudo iniciarse sola",
+      message:
+        "En algunos navegadores el autoplay se bloquea en producción. Abre el menú y pulsa Reproductor para activarla manualmente.",
+      actionLabel: "Ir al reproductor",
+      actionTarget: "#reproductor-footer",
+    };
+  }
+
+  return {
+    title: "La música no pudo iniciarse sola",
+    message:
+      "En algunos navegadores el autoplay se bloquea en producción. Activa el reproductor manualmente desde el disco flotante.",
   };
 }
 
@@ -355,6 +373,7 @@ export async function initSoundCloudPlayer() {
         }
 
         hasShownAutoplayToast = true;
+        setPlayerStatus("Autoplay bloqueado. Pulsa play para escuchar.");
         showAppToast(buildAutoplayToastContent());
       }, AUTOPLAY_TOAST_DELAY_MS);
     };
@@ -471,6 +490,10 @@ export async function initSoundCloudPlayer() {
       updatePlayButton(false);
       setPlayerStatus("Cargando desde SoundCloud...");
 
+      if (showAutoplayFallbackToast && shouldAutoplay) {
+        scheduleAutoplayFallbackToast();
+      }
+
       widget.load(track.url, {
         ...soundCloudPlayerOptions,
         auto_play: shouldAutoplay,
@@ -483,14 +506,10 @@ export async function initSoundCloudPlayer() {
           syncCurrentSound(widget);
 
           if (shouldAutoplay) {
-            setPlayerStatus("Preparando reproduccion...");
+            setPlayerStatus("Preparando reproducción...");
             requestPlayback();
           } else {
             setPlayerStatus("Listo para reproducir");
-          }
-
-          if (showAutoplayFallbackToast && shouldAutoplay) {
-            scheduleAutoplayFallbackToast();
           }
         },
       });
@@ -568,7 +587,7 @@ export async function initSoundCloudPlayer() {
         return;
       }
 
-      setPlayerStatus("Preparando reproduccion...");
+      setPlayerStatus("Preparando reproducción...");
       requestPlayback();
     });
 
@@ -603,5 +622,6 @@ export async function initSoundCloudPlayer() {
     setTonearmAngle(TONEARM_REST_ANGLE);
     setDiscRotation(0);
     setPlayerStatus("Reproductor no disponible en este momento");
+    showAppToast(buildPlaybackUnavailableToastContent());
   }
 }

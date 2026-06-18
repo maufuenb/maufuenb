@@ -39,6 +39,10 @@
     padding: 0.1rem 0;
   }
 
+  .nav-link[data-nav-active="true"] {
+    color: var(--cyan);
+  }
+
   .nav-dropdown {
     display: flex;
     flex-direction: column;
@@ -141,7 +145,8 @@
   }
 
   .nav-dropdown__link:hover,
-  .nav-dropdown__link:focus-visible {
+  .nav-dropdown__link:focus-visible,
+  .nav-dropdown__link[data-nav-active="true"] {
     color: var(--cyan);
     box-shadow: none;
     transform: none;

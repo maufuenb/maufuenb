@@ -1,3 +1,4 @@
+import { initBeyondLightbox } from "./modules/beyond-lightbox.js";
 import { loadComponents } from "./modules/component-loader.js";
 import { initContactModal } from "./modules/contact-modal.js";
 import { initFooterDock } from "./modules/footer-dock.js";
@@ -27,6 +28,7 @@ async function initPage() {
     await initGitHubProfile();
     initHeaderNav();
     initInternalNavigation();
+    initBeyondLightbox();
     initContactModal();
     initFooterDock();
     initRevealAnimations();
