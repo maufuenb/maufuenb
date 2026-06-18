@@ -58,6 +58,11 @@ export function initHeaderNav() {
   const observedSections = Array.from(navItemsById.keys())
     .map((id) => document.getElementById(id))
     .filter(Boolean);
+  const observedSectionOrder = new Map(
+    observedSections.map((section, index) => [section.id, index]),
+  );
+  let scrollSpyFrame = null;
+  let manualActiveId = null;
 
   const closeDropdown = () => {
     if (!dropdown || !dropdownTrigger) {
@@ -130,6 +135,13 @@ export function initHeaderNav() {
 
   nav.querySelectorAll("a").forEach((link) => {
     link.addEventListener("click", () => {
+      const href = link.getAttribute("href");
+
+      if (href?.startsWith("#")) {
+        manualActiveId = href.slice(1);
+        setActiveLink(manualActiveId);
+      }
+
       closeMenu();
     });
   });
@@ -173,28 +185,122 @@ export function initHeaderNav() {
     closeDropdown();
   });
 
-  if (observedSections.length > 0) {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleEntries = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((entryA, entryB) => entryB.intersectionRatio - entryA.intersectionRatio);
+  const updateActiveSectionFromScroll = () => {
+    scrollSpyFrame = null;
 
-        if (visibleEntries.length === 0) {
+    if (observedSections.length === 0) {
+      return;
+    }
+
+    const headerBottom = header.getBoundingClientRect().bottom;
+    const preferredLine = Math.round(window.innerHeight * 0.36);
+    const activationLine = Math.max(headerBottom + 24, preferredLine);
+    const firstObservedSection = observedSections[0];
+
+    if (firstObservedSection) {
+      const firstSectionTop = firstObservedSection.getBoundingClientRect().top;
+
+      if (firstSectionTop > activationLine) {
+        manualActiveId = null;
+        setActiveLink(null);
+        return;
+      }
+    }
+
+    const sectionStates = observedSections.map((section) => {
+      const rect = section.getBoundingClientRect();
+
+      return {
+        id: section.id,
+        top: rect.top,
+        bottom: rect.bottom,
+        distanceToLine:
+          rect.top <= activationLine && rect.bottom >= activationLine
+            ? 0
+            : Math.min(
+                Math.abs(rect.top - activationLine),
+                Math.abs(rect.bottom - activationLine),
+              ),
+      };
+    });
+
+    if (manualActiveId) {
+      const manualIndex = observedSectionOrder.get(manualActiveId);
+      const manualSection = sectionStates.find((section) => section.id === manualActiveId);
+      const nextSection =
+        manualIndex !== undefined ? sectionStates[manualIndex + 1] : null;
+
+      if (manualSection) {
+        const manualSectionStarted = manualSection.top <= activationLine + 120;
+        const nextSectionHasTakenOver = Boolean(nextSection) && nextSection.top <= activationLine;
+
+        if (manualSectionStarted && !nextSectionHasTakenOver) {
+          setActiveLink(manualActiveId);
           return;
         }
+      }
 
-        setActiveLink(visibleEntries[0].target.id);
-      },
-      {
-        rootMargin: "-30% 0px -45% 0px",
-        threshold: [0.2, 0.35, 0.5, 0.65],
-      },
-    );
+      manualActiveId = null;
+    }
 
-    observedSections.forEach((section) => observer.observe(section));
-  }
+    const currentSection = sectionStates
+      .slice()
+      .sort((sectionA, sectionB) => {
+        if (sectionA.distanceToLine !== sectionB.distanceToLine) {
+          return sectionA.distanceToLine - sectionB.distanceToLine;
+        }
+
+        const sectionAContainsLine = sectionA.top <= activationLine && sectionA.bottom >= activationLine;
+        const sectionBContainsLine = sectionB.top <= activationLine && sectionB.bottom >= activationLine;
+
+        if (sectionAContainsLine !== sectionBContainsLine) {
+          return sectionAContainsLine ? -1 : 1;
+        }
+
+        if (sectionA.top !== sectionB.top) {
+          return Math.abs(sectionA.top - activationLine) - Math.abs(sectionB.top - activationLine);
+        }
+
+        return (
+          (observedSectionOrder.get(sectionA.id) ?? Number.MAX_SAFE_INTEGER) -
+          (observedSectionOrder.get(sectionB.id) ?? Number.MAX_SAFE_INTEGER)
+        );
+      })[0];
+
+    if (currentSection) {
+      setActiveLink(currentSection.id);
+      return;
+    }
+
+    const nextSection = sectionStates.sort((sectionA, sectionB) => {
+      if (sectionA.top !== sectionB.top) {
+        return sectionA.top - sectionB.top;
+      }
+
+      return (
+        (observedSectionOrder.get(sectionA.id) ?? Number.MAX_SAFE_INTEGER) -
+        (observedSectionOrder.get(sectionB.id) ?? Number.MAX_SAFE_INTEGER)
+      );
+    })[0];
+
+    if (nextSection) {
+      setActiveLink(nextSection.id);
+    }
+  };
+
+  const scheduleScrollSpyUpdate = () => {
+    if (scrollSpyFrame !== null) {
+      return;
+    }
+
+    scrollSpyFrame = window.requestAnimationFrame(updateActiveSectionFromScroll);
+  };
+
+  window.addEventListener("scroll", scheduleScrollSpyUpdate, { passive: true });
+  window.addEventListener("resize", scheduleScrollSpyUpdate);
+  window.addEventListener("load", scheduleScrollSpyUpdate);
 
   closeMenu();
-  setActiveLink("perfil");
+  setActiveLink(null);
+  scheduleScrollSpyUpdate();
 }

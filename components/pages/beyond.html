@@ -1,5 +1,5 @@
 <section
-  class="flex min-h-[calc(100vh-var(--header-offset))] scroll-mt-[var(--header-offset)] snap-start snap-always flex-col justify-center py-10 max-[1023px]:min-h-0 max-[1023px]:py-12 max-[1023px]:pb-6 max-[767px]:py-14 max-[767px]:pb-4">
+  class="flex min-h-[calc(100vh-var(--header-offset))] scroll-mt-[var(--header-offset)] snap-start snap-always flex-col justify-start py-6 max-[1023px]:min-h-0 max-[1023px]:py-4 max-[1023px]:pb-6 max-[767px]:py-3 max-[767px]:pb-4">
   <div class="reveal mb-8 w-full">
     <p class="mb-4 font-['Orbitron'] text-[0.84rem] uppercase tracking-[0.18em] text-cyan-300">Beyond Code</p>
     <h2 class="m-0 max-w-[24ch] font-['Orbitron'] text-[clamp(1.6rem,3vw,2.5rem)] leading-[1.08]">Intereses e
@@ -43,21 +43,21 @@
       <h2 class="m-0 max-w-[18ch] font-['Orbitron'] text-[clamp(1.35rem,2.2vw,2rem)] leading-[1.08] md:max-[1023px]:max-w-none">Hardware, experimentos y mundo real</h2>
 
       <div class="mt-[1.6rem] grid grid-cols-2 gap-4 max-[1023px]:grid-cols-1">
-        <div class="flex min-h-[10.5rem] flex-col gap-[0.9rem] rounded-[1.2rem] border border-white/6 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.015)),rgba(8,10,22,0.56)] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_12px_26px_rgba(0,0,0,0.18)] max-[1023px]:min-h-0">
+        <div class="flex min-h-[10.5rem] flex-col gap-[0.9rem] rounded-[1.2rem] border border-white/6 bg-[color:rgba(8,10,22,0.56)] bg-[image:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.015))] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_12px_26px_rgba(0,0,0,0.18)] max-[1023px]:min-h-0">
           <span class="inline-flex self-start rounded-full bg-cyan-300/10 px-[0.55rem] py-[0.35rem] font-['Orbitron'] text-[0.64rem] uppercase tracking-[0.14em] text-cyan-300">Tech</span>
           <p class="m-0 text-[1rem] leading-[1.65] text-[#d2c7f2]">
             Desarmar, armar, reparar y optimizar rendimiento fue una de mis primeras puertas al mundo técnico.
           </p>
         </div>
 
-        <div class="flex min-h-[10.5rem] flex-col gap-[0.9rem] rounded-[1.2rem] border border-white/6 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.015)),rgba(8,10,22,0.56)] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_12px_26px_rgba(0,0,0,0.18)] max-[1023px]:min-h-0">
+        <div class="flex min-h-[10.5rem] flex-col gap-[0.9rem] rounded-[1.2rem] border border-white/6 bg-[color:rgba(8,10,22,0.56)] bg-[image:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.015))] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_12px_26px_rgba(0,0,0,0.18)] max-[1023px]:min-h-0">
           <span class="inline-flex self-start rounded-full bg-cyan-300/10 px-[0.55rem] py-[0.35rem] font-['Orbitron'] text-[0.64rem] uppercase tracking-[0.14em] text-cyan-300">Craft</span>
           <p class="m-0 text-[1rem] leading-[1.65] text-[#d2c7f2]">
             Coleccionismo, impresión 3D y maquetado me conectan con el detalle y la construcción tangible.
           </p>
         </div>
 
-        <div class="col-span-full flex min-h-0 flex-col gap-[0.9rem] rounded-[1.2rem] border border-white/6 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.015)),rgba(8,10,22,0.56)] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_12px_26px_rgba(0,0,0,0.18)]">
+        <div class="col-span-full flex min-h-0 flex-col gap-[0.9rem] rounded-[1.2rem] border border-white/6 bg-[color:rgba(8,10,22,0.56)] bg-[image:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.015))] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_12px_26px_rgba(0,0,0,0.18)]">
           <span class="inline-flex self-start rounded-full bg-cyan-300/10 px-[0.55rem] py-[0.35rem] font-['Orbitron'] text-[0.64rem] uppercase tracking-[0.14em] text-cyan-300">Offline</span>
           <p class="m-0 text-[1rem] leading-[1.65] text-[#d2c7f2]">
             Trekking, bosque, fotografía y naturaleza me ayudan a salir del ruido digital y volver con ideas más
@@ -76,7 +76,7 @@
       </div>
     </div>
 
-    <div class="beyond-photo-slider" aria-label="Fotografías de naturaleza y recorrido personal">
+    <div class="beyond-photo-slider" aria-label="Fotografías de naturaleza y recorrido personal" data-horizontal-drag>
       <figure class="beyond-photo-card beyond-photo-card--trail m-0">
         <button class="beyond-photo-card__button" type="button" data-beyond-photo-trigger
           data-beyond-photo-src="./assets/img/beyond/img-3.webp"
@@ -85,6 +85,7 @@
           data-beyond-photo-caption="Explorar, observar y bajar el ruido para volver con ideas más claras."
           aria-label="Abrir imagen Outside Signal en grande">
           <img src="./assets/img/beyond/img-3.webp" alt="Mauricio caminando por un sendero de bosque"
+            loading="lazy" decoding="async"
             class="beyond-photo-card__image">
           <figcaption class="beyond-photo-card__caption">
             <span class="beyond-photo-card__eyebrow">Outside Signal</span>
@@ -101,6 +102,7 @@
           data-beyond-photo-caption="Naturaleza y fotografía como parte de mi forma de mirar y construir."
           aria-label="Abrir imagen Visual Pause en grande">
           <img src="./assets/img/beyond/img-4.webp" alt="Mauricio sentado sobre un tronco en medio del bosque"
+            loading="lazy" decoding="async"
             class="beyond-photo-card__image">
           <figcaption class="beyond-photo-card__caption">
             <span class="beyond-photo-card__eyebrow">Visual Pause</span>
@@ -117,6 +119,7 @@
           data-beyond-photo-caption="La aventura también está en seguir subiendo, incluso cuando el clima cambia."
           aria-label="Abrir imagen Adventure Mode en grande">
           <img src="./assets/img/beyond/img-2.webp" alt="Mauricio en la montaña bajo un cielo nublado"
+            loading="lazy" decoding="async"
             class="beyond-photo-card__image">
           <figcaption class="beyond-photo-card__caption">
             <span class="beyond-photo-card__eyebrow">Adventure Mode</span>

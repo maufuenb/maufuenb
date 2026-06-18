@@ -6,17 +6,80 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description"
     content="Portafolio de Mauricio Andrés Fuentes Bustamante, ingeniero informático y administrador de empresas desde Viña del Mar, Chile.">
+  <meta name="author" content="Mauricio Andrés Fuentes Bustamante">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="theme-color" content="#07020f">
+  <link rel="canonical" href="https://maufuenb.github.io/maufuenb/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_CL">
+  <meta property="og:site_name" content="Mauricio Andrés | Developer Profile">
+  <meta property="og:title" content="Mauricio Andrés | Developer Profile">
+  <meta property="og:description"
+    content="Portafolio de Mauricio Andrés Fuentes Bustamante, ingeniero informático y administrador de empresas desde Viña del Mar, Chile.">
+  <meta property="og:url" content="https://maufuenb.github.io/maufuenb/">
+  <meta property="og:image" content="https://maufuenb.github.io/maufuenb/assets/img/Avatar/Avatar.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mauricio Andrés | Developer Profile">
+  <meta name="twitter:description"
+    content="Portafolio de Mauricio Andrés Fuentes Bustamante, ingeniero informático y administrador de empresas desde Viña del Mar, Chile.">
+  <meta name="twitter:image" content="https://maufuenb.github.io/maufuenb/assets/img/Avatar/Avatar.webp">
   <title>Mauricio Andrés | Developer Profile</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Rajdhani:wght@400;500;600;700&display=swap"
     rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="./assets/css/tailwind.css">
   <link rel="stylesheet" href="./assets/css/base.css">
   <link rel="stylesheet" href="./assets/css/effects.css">
   <link rel="stylesheet" href="./assets/css/animations.css">
   <link rel="icon" href="./assets/img/favicon.svg" type="image/svg+xml">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://maufuenb.github.io/maufuenb/#person",
+          "name": "Mauricio Andrés Fuentes Bustamante",
+          "alternateName": "Mafu",
+          "url": "https://maufuenb.github.io/maufuenb/",
+          "image": "https://maufuenb.github.io/maufuenb/assets/img/Avatar/Avatar.webp",
+          "jobTitle": "Ingeniero Informático y Administrador de Empresas",
+          "description": "Desarrollador con visión técnica, enfoque práctico y estética futurista desde Viña del Mar, Chile.",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Viña del Mar",
+            "addressCountry": "CL"
+          },
+          "sameAs": [
+            "https://github.com/maufuenb"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://maufuenb.github.io/maufuenb/#website",
+          "url": "https://maufuenb.github.io/maufuenb/",
+          "name": "Mauricio Andrés | Developer Profile",
+          "inLanguage": "es-CL",
+          "description": "Portafolio de Mauricio Andrés Fuentes Bustamante, ingeniero informático y administrador de empresas desde Viña del Mar, Chile."
+        },
+        {
+          "@type": "CollectionPage",
+          "@id": "https://maufuenb.github.io/maufuenb/#portfolio",
+          "url": "https://maufuenb.github.io/maufuenb/",
+          "name": "Portafolio de Mauricio Andrés",
+          "isPartOf": {
+            "@id": "https://maufuenb.github.io/maufuenb/#website"
+          },
+          "about": {
+            "@id": "https://maufuenb.github.io/maufuenb/#person"
+          },
+          "inLanguage": "es-CL"
+        }
+      ]
+    }
+  </script>
 </head>
 
 <body
@@ -44,7 +107,7 @@
       </a>
     </div>
     <div data-floating-player-host>
-      <div class="floating-player" data-floating-player>
+      <div class="floating-player" data-floating-player data-dock-ready="false">
         <div class="floating-player__panel">
           <div class="floating-player__bar"></div>
           <div class="floating-player__summary">
@@ -72,7 +135,7 @@
         </div>
       </div>
       <div class="floating-player__controls px-4 pb-4">
-        <p class="m-0 text-[0.82rem] text-cyan-100/80" data-soundcloud-status>Inicializando reproductor...</p>
+        <p class="m-0 text-[0.82rem] text-cyan-100/80" data-soundcloud-status>Activa el reproductor cuando quieras escuchar.</p>
         <div class="floating-player__actions mt-4 flex items-center gap-3">
           <button
             class="floating-player__icon-button floating-player__icon-button--secondary"
@@ -105,13 +168,14 @@
     </div>
 
     <header
-      class="fixed inset-x-0 top-0 z-20 border-b border-white/8 bg-[linear-gradient(180deg,rgba(7,10,22,0.82),rgba(7,10,22,0.52))] shadow-[0_12px_28px_rgba(0,0,0,0.14)] backdrop-blur-[16px]">
+      data-app-header
+      class="fixed inset-x-0 top-0 z-20 bg-[linear-gradient(180deg,rgba(7,10,22,0.82),rgba(7,10,22,0.52))] shadow-[0_12px_28px_rgba(0,0,0,0.14)] backdrop-blur-[16px]">
       <div class="mx-auto max-w-[1240px] px-[1.1rem] md:px-6">
         <div data-component="header"></div>
       </div>
     </header>
 
-    <main id="top"
+    <main id="top" data-app-main
       class="relative z-10 mx-auto flex max-w-[1240px] flex-col px-[1.1rem] pb-8 pt-[var(--header-offset)] md:px-6">
       <div data-component="hero"></div>
       <div id="perfil" data-component="profile"></div>

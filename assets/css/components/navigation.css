@@ -47,6 +47,11 @@ header[data-nav-open="true"] .nav-toggle {
 .nav-dropdown__trigger {
   position: relative;
   z-index: 2;
+  border: 0;
+  appearance: none;
+  box-shadow: none;
+  font: inherit;
+  outline: none;
 }
 
 .nav-dropdown__trigger[data-nav-active="true"] .nav-dropdown__caret {

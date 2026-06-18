@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://maufuenb.github.io/maufuenb/sitemap.xml

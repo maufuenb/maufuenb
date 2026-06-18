@@ -1,0 +1,12 @@
+{
+  "name": "portafolio",
+  "private": true,
+  "scripts": {
+    "build:tailwind": "npx @tailwindcss/cli -i ./assets/css/tailwind-source.css -o ./assets/css/tailwind.css --minify",
+    "watch:tailwind": "npx @tailwindcss/cli -i ./assets/css/tailwind-source.css -o ./assets/css/tailwind.css --watch"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.10",
+    "tailwindcss": "^4.1.10"
+  }
+}

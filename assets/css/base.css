@@ -9,6 +9,7 @@
   --shadow: 0 30px 60px rgba(0, 0, 0, 0.38);
   --radius: 30px;
   --header-offset: 7.5rem;
+  --section-scroll-gap: 1.35rem;
 }
 
 * {
@@ -68,6 +69,11 @@ html::-webkit-scrollbar-corner {
 img {
   display: block;
   max-width: 100%;
+}
+
+main > [data-component]:not(:first-child) h2,
+main > [data-component]:not(:first-child) h3 {
+  font-weight: 500;
 }
 
 a {
@@ -212,6 +218,15 @@ main > [data-component] > section {
   overflow: clip;
 }
 
+main > #beyond-code {
+  align-items: flex-start;
+}
+
+main > #beyond-code > section {
+  justify-content: flex-start !important;
+  min-height: auto !important;
+}
+
 @supports not (overflow: clip) {
   main > [data-component] > section {
     overflow: hidden;
@@ -220,7 +235,7 @@ main > [data-component] > section {
 
 @media (min-width: 1024px) {
   main {
-    gap: 14vh;
+    gap: 11vh;
   }
 
   main > [data-component] {
@@ -228,6 +243,7 @@ main > [data-component] > section {
     align-items: center;
     min-height: calc(100dvh - var(--header-offset));
     padding-block: 4vh;
+    scroll-margin-top: calc(var(--header-offset) + var(--section-scroll-gap));
     scroll-snap-align: center;
     scroll-snap-stop: always;
   }
@@ -241,7 +257,21 @@ main > [data-component] > section {
   }
 
   #stack > section {
-    transform: translateY(-2vh);
+    transform: translateY(-1vh);
+  }
+
+  main > #beyond-code {
+    min-height: auto;
+    padding-block: 1.25rem;
+    scroll-margin-top: calc(var(--header-offset) + var(--section-scroll-gap));
+    scroll-snap-align: start;
+    margin-top: 0;
+    align-items: flex-start;
+  }
+
+  main > #beyond-code > section {
+    padding-top: 0 !important;
+    padding-bottom: clamp(1rem, 2vh, 1.4rem) !important;
   }
 }
 
@@ -251,7 +281,7 @@ main > [data-component] > section {
   }
 
   main {
-    gap: 8vh;
+    gap: 7vh;
   }
 
   main > [data-component] {
@@ -259,6 +289,7 @@ main > [data-component] > section {
     align-items: center;
     min-height: calc(100dvh - var(--header-offset));
     padding-block: 2vh;
+    scroll-margin-top: calc(var(--header-offset) + var(--section-scroll-gap));
     scroll-snap-align: start;
     scroll-snap-stop: always;
   }
@@ -267,6 +298,21 @@ main > [data-component] > section {
     width: 100%;
     min-height: calc(100dvh - var(--header-offset)) !important;
     overflow: visible;
+  }
+
+  main > #beyond-code {
+    align-items: flex-start;
+    min-height: auto;
+    padding-block: 0.9rem;
+    scroll-margin-top: calc(var(--header-offset) + var(--section-scroll-gap));
+    scroll-snap-align: start;
+    margin-top: 0;
+  }
+
+  main > #beyond-code > section {
+    min-height: auto !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
   }
 
   .bg-smoke {
