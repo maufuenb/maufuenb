@@ -113,8 +113,14 @@ Mi enfoque es pragmático: conozco diversas tecnologías y aprovecho arquitectur
 ## `> stats.execute`
 
 <div align="center">
-  <img height="180" src="https://github-readme-stats.vercel.app/api?username=maufuenb&show_icons=true&theme=radical&hide_border=true&title_color=00F7FF&icon_color=FF00C8&text_color=F8F8FF&bg_color=0D1117&border_radius=10" alt="GitHub Stats" />
-  <img height="180" src="https://github-readme-stats.vercel.app/api/top-langs/?username=maufuenb&layout=compact&theme=radical&hide_border=true&title_color=00F7FF&text_color=F8F8FF&bg_color=0D1117&border_radius=10" alt="Top Languages" />
+  <img height="180" src="https://github-readme-stats-eight-theta.vercel.app/api?username=maufuenb&show_icons=true&theme=radical&hide_border=true&title_color=00F7FF&icon_color=FF00C8&text_color=F8F8FF&bg_color=0D1117&border_radius=10" alt="GitHub Stats" />
+  <img height="180" src="https://github-readme-stats-eight-theta.vercel.app/api/top-langs?username=maufuenb&layout=compact&theme=radical&hide_border=true&title_color=00F7FF&text_color=F8F8FF&bg_color=0D1117&border_radius=10" alt="Top Languages" />
+</div>
+
+<br>
+
+<div align="center">
+  <img width="95%" src="https://github-readme-activity-graph.vercel.app/graph?username=maufuenb&theme=react-dark&bg_color=0D1117&color=00F7FF&line=FF00C8&point=FFFFFF&area=true&hide_border=true" alt="Activity Graph" />
 </div>
 
 ## `> beyond.code`
