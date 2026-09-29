@@ -121,16 +121,6 @@ Mi enfoque es pragmático: conozco diversas tecnologías y aprovecho arquitectur
 
 <br>
 
-## `> building.brands`
-
-<div align="center">
-  <a href="https://maufuenb.github.io/maufuenb/">
-    <img src="https://raw.githubusercontent.com/maufuenb/maufuenb/main/assets/img/logos/logo-kiveron.png" alt="Kiveron Logo" width="180" />
-  </a>
-  <br><br>
-  <sub><strong>Kiveron</strong> y <strong>Kiveron Partners</strong> representan el núcleo visual de un ecosistema de productos en constante evolución.</sub>
-</div>
-
 ## `> stats.execute`
 
 <div align="center">
