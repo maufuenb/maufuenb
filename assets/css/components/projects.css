@@ -156,6 +156,11 @@
     transform: none;
   }
 
+  .project-carousel-slide {
+    flex: 0 0 21rem;
+    width: 21rem;
+  }
+
   .project-carousel-slide > .project-card {
     max-width: none;
     width: 100%;

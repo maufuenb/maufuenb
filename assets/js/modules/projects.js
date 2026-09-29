@@ -1,5 +1,4 @@
 function initProjectCarousel(root) {
-  const DESKTOP_WIDE_BREAKPOINT = 1440;
   const TABLET_BREAKPOINT = 1023;
   const MOBILE_BREAKPOINT = 767;
   const carousel = root.querySelector("[data-project-carousel]");
@@ -64,7 +63,10 @@ function initProjectCarousel(root) {
     });
   };
 
-  const getDesktopVisibleCount = () => (window.innerWidth >= DESKTOP_WIDE_BREAKPOINT ? 4 : 3);
+  const getDesktopVisibleCount = () => {
+    const slideWidth = slides[0]?.getBoundingClientRect().width || 336;
+    return Math.max(1, Math.floor((carousel.clientWidth + 24) / (slideWidth + 24)));
+  };
 
   const updateDesktopDots = (startIndex, visibleCount) => {
     const maxStartIndex = Math.max(0, slides.length - visibleCount);
@@ -96,7 +98,8 @@ function initProjectCarousel(root) {
     root.style.setProperty("--project-visible-count", String(visibleCount));
     root.dataset.projectCompact = "false";
     track.style.height = "";
-    track.style.transform = `translate3d(calc(-${startIndex} * ((100% - (${visibleCount} - 1) * 1.5rem) / ${visibleCount} + 1.5rem)), 0, 0)`;
+    track.style.justifyContent = slides.length <= visibleCount ? "center" : "";
+    track.style.transform = `translate3d(-${startIndex * (slides[0].getBoundingClientRect().width + 24)}px, 0, 0)`;
 
     slides.forEach((slide, slideIndex) => {
       const article = slide.firstElementChild;

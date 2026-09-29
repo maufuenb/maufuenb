@@ -101,6 +101,8 @@ Mi enfoque es pragmático: conozco diversas tecnologías y aprovecho arquitectur
 | :--- | :--- | :---: |
 | **Alke Wallet Digital** | Interfaz financiera desarrollada como proyecto de aprendizaje. | [Demo](https://maufuenb.github.io/Alke-Wallet-Digital/) · [Código](https://github.com/maufuenb/Alke-Wallet-Digital) |
 | **Planner** | Aplicación web instalable para planificación mensual con almacenamiento local. | [Demo](https://maufuenb.github.io/ABP-modulo-4/) |
+| **Conversor de imágenes a WebP con Python** | Optimiza imágenes con Pillow, ajusta su resolución y elimina metadatos. | [GitHub](https://github.com/maufuenb/convertir-imagenes-a-webp-con-PYTHON) |
+| **Conversor de imágenes a WebP con JavaScript** | Convierte imágenes en el navegador con Canvas y sin librerías externas. | [GitHub](https://github.com/maufuenb/convertir-imagenes-a-webp-con-JS) |
 
 ### 🎮 Juegos
 
