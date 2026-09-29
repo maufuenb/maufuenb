@@ -6,6 +6,8 @@ import { initRevealAnimations } from "./modules/reveal.js";
 const CRITICAL_COMPONENTS = ["header", "hero", "profile", "footer"];
 const DEFERRED_COMPONENTS = [
   "stack",
+  "projects-kiveron",
+  "projects-games",
   "projects-public",
   "projects-products",
   "beyond",

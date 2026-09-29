@@ -4,6 +4,8 @@ export const componentPaths = {
   hero: "./components/pages/hero.html",
   profile: "./components/pages/profile.html",
   stack: "./components/pages/stack.html",
+  "projects-kiveron": "./components/pages/projects-kiveron.html",
+  "projects-games": "./components/pages/projects-games.html",
   "projects-public": "./components/pages/projects-public.html",
   "projects-products": "./components/pages/projects-products.html",
   beyond: "./components/pages/beyond.html",

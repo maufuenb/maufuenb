@@ -86,17 +86,34 @@ Mi enfoque es pragmático: conozco diversas tecnologías y aprovecho arquitectur
 
 ## `> featured.projects`
 
-<br>
+### 🌐 Ecosistema Kiveron
 
-<div align="center">
-
-| Proyecto | Estado | Enlaces |
+| Proyecto | Estado | Enlace |
 | :--- | :---: | :---: |
-| 💳 **Alke Wallet Digital**<br><sub>Interfaz financiera moderna enfocada en experiencia visual y navegación fluida.</sub> | ![Live](https://img.shields.io/badge/Status-Live_Project-39FF14?style=flat-square) | [<img src="https://img.shields.io/badge/Demo-Web-00F7FF?style=flat-square&logo=githubpages&logoColor=black" />](https://maufuenb.github.io/Alke-Wallet-Digital/) [<img src="https://img.shields.io/badge/Code-GitHub-FF00C8?style=flat-square&logo=github" />](https://github.com/maufuenb/Alke-Wallet-Digital) |
-| 🌐 **Kiveron**<br><sub>Ecosistema digital para comunidades geek: coleccionismo, interacción e intercambio.</sub> | ![Dev](https://img.shields.io/badge/Status-In_Development-FF00C8?style=flat-square) | <sub>En desarrollo</sub> |
-| 🤖 **Beru**<br><sub>Sistema de asistencia inteligente para navegación marítima y apoyo operativo a bordo.</sub> | ![Private](https://img.shields.io/badge/Status-Private_Project-00F7FF?style=flat-square) | <sub>Proyecto Privado</sub> |
+| **Kiveron** — Plataforma para comunidades geek, coleccionismo e intercambio. | Beta abierta | [Visitar kiveron.cl](https://kiveron.cl) |
+| **Kiveron Partners** — Plataforma publicitaria para empresas y negocios del ecosistema. | En desarrollo | — |
+| **Kiveron Market** — Marketplace para la comunidad Kiveron. | Próximamente | — |
+| **Kiveron Mobil** — Aplicación móvil para Android; una versión para iOS está por definir. | En desarrollo | — |
 
-</div>
+### 🧪 Estudio y pruebas
+
+| Proyecto | Descripción | Enlaces |
+| :--- | :--- | :---: |
+| **Alke Wallet Digital** | Interfaz financiera desarrollada como proyecto de aprendizaje. | [Demo](https://maufuenb.github.io/Alke-Wallet-Digital/) · [Código](https://github.com/maufuenb/Alke-Wallet-Digital) |
+| **Planner** | Aplicación web instalable para planificación mensual con almacenamiento local. | [Demo](https://maufuenb.github.io/ABP-modulo-4/) |
+
+### 🎮 Juegos
+
+| Proyecto | Descripción | Enlace |
+| :--- | :--- | :---: |
+| **Memorice Neon Grid** | Juego de memoria con selector de dificultad, modo libre y contrarreloj, y ranking local. | [Jugar](https://maufuenb.github.io/Memorice_cyber_v2/) |
+
+### 🚀 Proyectos propios
+
+| Proyecto | Descripción | Estado |
+| :--- | :--- | :---: |
+| **Beru** | Sistema de asistencia inteligente para navegación y apoyo operativo a bordo. | Proyecto privado |
+| **Inversión autónoma con IA** | Idea en exploración para un sistema autónomo de inversión de capitales mediante inteligencia artificial. | En etapa conceptual |
 
 <br>
 
@@ -104,10 +121,10 @@ Mi enfoque es pragmático: conozco diversas tecnologías y aprovecho arquitectur
 
 <div align="center">
   <a href="https://maufuenb.github.io/maufuenb/">
-    <img src="https://maufuenb.github.io/maufuenb/assets/img/logos/kiveron-logo.webp" alt="Kiveron Logo" width="180" />
+    <img src="https://maufuenb.github.io/maufuenb/assets/img/logos/logo-kiveron.png" alt="Kiveron Logo" width="180" />
   </a>
   <br><br>
-  <sub><strong>Kiveron</strong> y <strong>Kiveron Ads</strong> representan el núcleo visual de un ecosistema de productos en constante evolución.</sub>
+  <sub><strong>Kiveron</strong> y <strong>Kiveron Partners</strong> representan el núcleo visual de un ecosistema de productos en constante evolución.</sub>
 </div>
 
 ## `> stats.execute`

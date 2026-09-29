@@ -44,7 +44,7 @@ export function initHeaderNav() {
       return;
     }
 
-    const isProjectSection = activeId === "proyectos-publicos" || activeId === "productos-propios";
+    const isProjectSection = ["ecosistema-kiveron", "productos-propios", "proyectos-publicos", "juegos"].includes(activeId);
     dropdownTrigger.dataset.navActive = isProjectSection ? "true" : "false";
 
     if (isProjectSection) {
