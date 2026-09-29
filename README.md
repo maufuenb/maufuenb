@@ -93,7 +93,7 @@ Mi enfoque es pragmático: conozco diversas tecnologías y aprovecho arquitectur
 | **Kiveron** — Plataforma para comunidades geek, coleccionismo e intercambio. | Beta abierta | [Visitar kiveron.cl](https://kiveron.cl) |
 | **Kiveron Partners** — Plataforma publicitaria para empresas y negocios del ecosistema. | En desarrollo | — |
 | **Kiveron Market** — Marketplace para la comunidad Kiveron. | Próximamente | — |
-| **Kiveron Mobil** — Aplicación móvil para Android; una versión para iOS está por definir. | En desarrollo | — |
+| **Kiveron Móvil** — Aplicación móvil para Android; una versión para iOS está por definir. | En desarrollo | — |
 
 ### 🧪 Estudio y pruebas
 
