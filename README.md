@@ -109,6 +109,7 @@ Mi enfoque es pragmático: conozco diversas tecnologías y aprovecho arquitectur
 | Proyecto | Descripción | Enlace |
 | :--- | :--- | :---: |
 | **Memorice Neon Grid** | Juego de memoria con selector de dificultad, modo libre y contrarreloj, y ranking local. | [Jugar](https://maufuenb.github.io/Memorice_cyber_v2/) |
+| **Snake — Patio Arcade** | Versión web del clásico Snake con controles de teclado y táctiles, pausa y récord personal guardado localmente. | [Jugar](https://maufuenb.github.io/snake-game/) · [Código](https://github.com/maufuenb/snake-game) |
 
 ### 🚀 Proyectos propios
 
